@@ -68,6 +68,16 @@
   .role.a{color:#f2c98e;border-color:rgba(230,180,120,.4)} .role.t{color:#8fb8f2;border-color:rgba(90,155,240,.38)}
   .role.g{color:#aeb9d8;border-color:rgba(150,165,210,.4)}
   .rdesc{color:var(--dim);font-size:14.5px;margin:16px 0 6px;max-width:46ch}
+  .manifesto{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);
+    border-radius:16px;padding:17px 18px;margin:20px 0 4px;box-shadow:var(--shadow)}
+  .manifesto h3{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--gold);margin-bottom:10px}
+  .manifesto p{font-size:14px;color:var(--dim);margin-bottom:11px;line-height:1.55}
+  .manifesto ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .manifesto li{font-size:14px;padding-left:19px;position:relative;line-height:1.5}
+  .manifesto li::before{content:"◆";position:absolute;left:0;top:3px;color:var(--gold);font-size:9px}
+  .manifesto li b{color:var(--ivory)}
+  .manifesto .kick{color:var(--gold);font-family:"Oswald";text-transform:uppercase;letter-spacing:.08em;
+    font-weight:700;font-size:13px;margin:13px 0 0}
   .course{display:flex;gap:10px;margin:22px 0 8px}
   .cstat{flex:1;background:var(--surf2);border:1px solid var(--line);border-radius:13px;padding:12px 13px}
   .cstat .k{font-family:"Oswald";text-transform:uppercase;letter-spacing:.13em;font-size:10px;color:var(--mut);font-weight:500}
@@ -109,6 +119,17 @@
   .hazbar{display:flex;align-items:center;gap:8px;background:rgba(63,131,189,.13);border:1px solid rgba(63,131,189,.3);
     border-radius:11px;padding:9px 12px;font-size:12.5px;color:#bcd6ec;margin-bottom:15px}
   .hazbar .w{color:#8ec6ef;font-weight:700}
+  .holemap{display:block;width:100%;height:172px;object-fit:cover;object-position:center;
+    border-radius:14px;border:1px solid var(--line);margin-bottom:14px;background:#0b1226;cursor:zoom-in}
+  .maphint{display:flex;justify-content:space-between;align-items:center;margin:-8px 2px 14px;
+    font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--mut)}
+  .lightbox{position:fixed;inset:0;z-index:60;background:rgba(4,7,15,.95);display:none;
+    align-items:center;justify-content:center;padding:20px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .lightbox.on{display:flex}
+  .lightbox img{max-width:100%;max-height:86vh;border-radius:12px;border:1px solid var(--line)}
+  .lightbox .x{position:absolute;top:calc(env(safe-area-inset-top) + 14px);right:18px;font-family:"Oswald";
+    font-size:22px;color:var(--ivory);width:44px;height:44px;border-radius:50%;background:var(--surf);
+    border:1px solid var(--line);display:grid;place-items:center}
 
   /* decision block */
   .decide{background:linear-gradient(180deg,var(--raise),var(--surf2));border:1px solid var(--goldline);
@@ -238,6 +259,8 @@
 <!-- ===== SUMMARY ===== -->
 <section class="screen pad" id="summary"></section>
 
+<div class="lightbox" id="lightbox" onclick="closeMap()"><button class="x" aria-label="Luk">✕</button><img id="lbimg" alt="Hul-kort"></div>
+
 <script>
 const PLAYERS=[
  {id:"oscar",name:"Oscar Mogensen",first:"Oscar",hcp:4.9,tier:"a"},
@@ -254,6 +277,11 @@ const RDESC={
  a:"Du har spillet til at score — men Skyrup straffer aggression. Vælg dine øjeblikke, respektér vandet.",
  t:"Positionsgolf er dit våben. Driveren bliver i baggen; bogey på de svære er planen, ikke nederlaget.",
  g:"Din opgave er point, ikke pars. Undgå de store tal, tag dine slag, og du samler stableford ind."
+};
+const KEND={
+ a:"Du kan angribe — men vælg dine øjeblikke. Banen straffer grådighed.",
+ t:"Position slår længde. Bogey på de svære er point i banken.",
+ g:"Du får slag på de svære huller — spil dem sikkert for net par, så scorer du."
 };
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 
@@ -386,8 +414,17 @@ function renderHome(){
     <span class="role ${r.c}">${r.t} · HCP ${String(player.hcp).replace('.',',')}</span>
     <p class="rdesc">${RDESC[player.tier]}</p>
     ${live}
-    <div style="flex:1"></div>
-    <div style="margin-top:26px">
+    <div class="manifesto">
+      <h3>Sådan vinder vi Skåne</h3>
+      <p>I dag spiller vi ikke otte runder golf. Vi spiller ÉN kamp — som ét hold. Skyrup vinder man ikke med længde. Man vinder den ved at spille <b>banen</b>, ikke sit ego.</p>
+      <ul>
+        <li><b>Spil banen.</b> Hvert hul fortæller dig præcis hvad der skal til — tee-kølle, target, og hvor du IKKE må gå. Følg det.</li>
+        <li><b>Spil sammen.</b> Den der lægger op og giver makkeren ro, vinder hullet. Helteslag taber matcher.</li>
+        <li><b>Kend dine slag.</b> ${KEND[player.tier]}</li>
+      </ul>
+      <p class="kick">Én plan. Nul helteslag. Kom så. 🇪🇺</p>
+    </div>
+    <div style="margin-top:18px">
       ${done?`<button class="big-btn" id="goSum">SE ROUND SUMMARY</button>`
       :inProg?`<button class="big-btn" id="cont">FORTSÆT · HUL ${playedIdx().length+1}</button>
                <button class="ghost" id="restart">START FORFRA</button>`
@@ -430,6 +467,8 @@ function renderHole(){
       <div class="hno">HOLE ${h.n}</div>
       <div class="hmeta">PAR <b>${h.par}</b> · <b>${h.len}</b> M<br>INDEX <b>${h.idx}</b></div>
     </div>
+    <img class="holemap" src="holes/${h.n}.jpg" alt="Hul ${h.n} kort" loading="lazy" onerror="this.style.display='none';var t=this.nextElementSibling;if(t&&t.classList.contains('maphint'))t.style.display='none';" onclick="openMap(${h.n})">
+    <div class="maphint"><span>Hul-kort</span><span>Tryk for fuldt skærm ⤢</span></div>
     <div class="hazbar">⚑ ${h.haz}</div>
     <div class="decide">
       <div class="d-eyebrow lab">Tee</div>
@@ -521,6 +560,10 @@ function renderSummary(){
   document.getElementById('backHome').onclick=()=>{renderHome();show('home');};
   show('summary');
 }
+
+/* ---------- hole-map lightbox ---------- */
+function openMap(n){var i=document.getElementById('lbimg');i.src='holes/'+n+'.jpg';document.getElementById('lightbox').classList.add('on');}
+function closeMap(){document.getElementById('lightbox').classList.remove('on');}
 
 /* ---------- boot / routing ---------- */
 function boot(){
