@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Team Europe · Martin</title>
+<meta name="theme-color" content="#0a1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Team Europe">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230a1020'/%3E%3Ctext x='90' y='120' font-size='96' text-anchor='middle' fill='%23e6c874' font-family='Georgia'%3E%E2%9B%B3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#0a1020; --ink0:#070b16; --surf:#121b36; --surf2:#0e1730; --raise:#16213f;
+    --line:#26315c; --gold:#e6c874; --gold2:#c9a44c; --goldline:rgba(230,200,116,.30);
+    --ivory:#f4efe2; --dim:#c7cfe2; --mut:#8f9cc0; --blue:#5a9bf0; --water:#3f83bd;
+    --under:#63cd90; --over:#eb736e; --shadow:0 18px 40px -20px rgba(0,0,0,.8);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--ivory);
+    font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:16px;line-height:1.5;overflow-x:hidden;
+    background-image:radial-gradient(120% 80% at 50% -10%, #16213f 0%, var(--bg) 55%);
+    background-attachment:fixed}
+  .lab{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-weight:600}
+  .num{font-family:"Archivo",sans-serif;font-variant-numeric:tabular-nums;font-weight:800}
+  button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer}
+  .screen{display:none;min-height:100dvh;flex-direction:column}
+  .screen.on{display:flex}
+  .pad{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+
+  /* ---------- START ---------- */
+  #start{padding-top:max(48px,calc(env(safe-area-inset-top) + 34px));padding-bottom:40px}
+  .crest{text-align:center;color:var(--gold);font-family:"Oswald";letter-spacing:.34em;font-size:11px;font-weight:500;opacity:.9}
+  .word{text-align:center;font-family:"Oswald";font-weight:700;letter-spacing:.06em;
+    font-size:clamp(38px,12vw,52px);line-height:1;margin:12px 0 4px;color:var(--ivory)}
+  .word em{color:var(--gold);font-style:normal}
+  .word2{text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.32em;
+    font-size:13px;color:var(--mut);font-weight:500}
+  .hair{height:1px;background:linear-gradient(90deg,transparent,var(--goldline),transparent);margin:26px 0 22px}
+  .pgrid{display:flex;flex-direction:column;gap:11px}
+  .pcard{display:flex;align-items:center;gap:15px;background:linear-gradient(180deg,var(--surf),var(--surf2));
+    border:1px solid var(--line);border-radius:16px;padding:16px 17px;text-align:left;
+    transition:transform .12s ease,border-color .2s;box-shadow:var(--shadow)}
+  .pcard:active{transform:scale(.985);border-color:var(--goldline)}
+  .pini{flex:0 0 46px;height:46px;border-radius:12px;display:grid;place-items:center;
+    font-family:"Oswald";font-weight:700;font-size:19px;color:var(--ink0);
+    background:linear-gradient(150deg,var(--gold),var(--gold2))}
+  .pini.t{background:linear-gradient(150deg,#7fb0f2,#3f6fc4)}
+  .pini.g{background:linear-gradient(150deg,#aeb7d4,#5f6a8e)}
+  .pname{flex:1}
+  .pname b{font-family:"Hanken Grotesk";font-weight:700;font-size:17px;display:block;letter-spacing:.01em}
+  .pname span{font-size:12.5px;color:var(--mut);font-family:"Oswald";letter-spacing:.08em;text-transform:uppercase}
+  .phcp{font-family:"Archivo";font-weight:800;font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}
+  .phcp small{display:block;font-family:"Oswald";font-size:9px;letter-spacing:.16em;color:var(--mut);text-align:right;font-weight:500;margin-top:-2px}
+  .startfoot{text-align:center;color:var(--mut);font-size:11.5px;margin-top:24px;line-height:1.7}
+
+  /* ---------- HOME ---------- */
+  #home{padding-top:max(46px,calc(env(safe-area-inset-top) + 30px));padding-bottom:34px;justify-content:flex-start}
+  .hi{font-family:"Oswald";text-transform:uppercase;letter-spacing:.2em;color:var(--mut);font-size:12px;font-weight:500}
+  .hname{font-family:"Oswald";font-weight:700;font-size:clamp(30px,9vw,40px);line-height:1.05;margin:5px 0 10px}
+  .role{display:inline-flex;align-items:center;gap:7px;font-family:"Oswald";text-transform:uppercase;
+    letter-spacing:.12em;font-size:12px;font-weight:600;padding:6px 13px;border-radius:30px;border:1px solid var(--line)}
+  .role.a{color:#f2c98e;border-color:rgba(230,180,120,.4)} .role.t{color:#8fb8f2;border-color:rgba(90,155,240,.38)}
+  .role.g{color:#aeb9d8;border-color:rgba(150,165,210,.4)}
+  .rdesc{color:var(--dim);font-size:14.5px;margin:16px 0 6px;max-width:46ch}
+  .course{display:flex;gap:10px;margin:22px 0 8px}
+  .cstat{flex:1;background:var(--surf2);border:1px solid var(--line);border-radius:13px;padding:12px 13px}
+  .cstat .k{font-family:"Oswald";text-transform:uppercase;letter-spacing:.13em;font-size:10px;color:var(--mut);font-weight:500}
+  .cstat .v{font-family:"Archivo";font-weight:800;font-size:20px;margin-top:2px}
+  .big-btn{display:block;width:100%;text-align:center;font-family:"Oswald";text-transform:uppercase;
+    letter-spacing:.16em;font-weight:700;font-size:17px;color:var(--ink0);
+    background:linear-gradient(180deg,var(--gold),var(--gold2));border-radius:15px;padding:19px;
+    box-shadow:0 14px 30px -12px rgba(230,200,116,.5);transition:transform .12s}
+  .big-btn:active{transform:scale(.98)}
+  .ghost{display:block;width:100%;text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.16em;
+    font-weight:600;font-size:14px;color:var(--dim);background:var(--surf);border:1px solid var(--line);
+    border-radius:14px;padding:15px;margin-top:11px}
+  .ghost:active{border-color:var(--goldline)}
+  .switch{display:block;margin:20px auto 0;color:var(--mut);font-size:12.5px;font-family:"Oswald";
+    text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid transparent}
+  .switch:active{color:var(--dim)}
+
+  /* ---------- STATUS BAR ---------- */
+  .statusbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
+    padding:max(10px,env(safe-area-inset-top)) 16px 10px;
+    background:linear-gradient(180deg,rgba(10,16,32,.96),rgba(10,16,32,.82));
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .sb-brand{font-family:"Oswald";text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--mut);font-weight:600}
+  .sb-brand b{color:var(--gold);font-weight:700}
+  .sb-live{display:flex;gap:12px;align-items:baseline}
+  .sb-live .u{font-family:"Archivo";font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+  .sb-live .u small{font-family:"Oswald";font-size:9px;letter-spacing:.12em;color:var(--mut);font-weight:500;margin-left:3px;text-transform:uppercase}
+  .sb-live .u.under{color:var(--under)} .sb-live .u.over{color:var(--over)}
+
+  /* ---------- HOLE ---------- */
+  #hole{padding:0}
+  .holebody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 130px}
+  .hhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .hhead .hno{font-family:"Oswald";font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+    font-size:clamp(34px,10vw,44px);line-height:.9}
+  .hhead .hmeta{text-align:right;font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;
+    font-size:13px;color:var(--dim);font-weight:500;line-height:1.5}
+  .hhead .hmeta b{color:var(--ivory);font-family:"Archivo";font-weight:800}
+  .hazbar{display:flex;align-items:center;gap:8px;background:rgba(63,131,189,.13);border:1px solid rgba(63,131,189,.3);
+    border-radius:11px;padding:9px 12px;font-size:12.5px;color:#bcd6ec;margin-bottom:15px}
+  .hazbar .w{color:#8ec6ef;font-weight:700}
+
+  /* decision block */
+  .decide{background:linear-gradient(180deg,var(--raise),var(--surf2));border:1px solid var(--goldline);
+    border-radius:18px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .decide::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 0%,rgba(230,200,116,.08),transparent 70%);pointer-events:none}
+  .d-eyebrow{color:var(--gold);font-size:12px}
+  .d-club{font-family:"Archivo";font-weight:800;font-size:clamp(40px,13vw,56px);line-height:.95;
+    letter-spacing:-.01em;margin:2px 0 3px;text-transform:uppercase}
+  .d-row{display:flex;gap:12px;margin-top:15px}
+  .d-cell{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .d-cell .k{color:var(--mut);font-size:10.5px}
+  .d-cell .v{font-weight:600;font-size:15px;margin-top:3px;line-height:1.3}
+  .d-cell.miss .k{color:#e8a09b} .d-cell.miss .v{color:#f2c3bf}
+  .d-appr{display:flex;align-items:center;gap:11px;margin-top:13px;padding-top:14px;border-top:1px solid var(--line)}
+  .d-appr .k{color:var(--gold);font-size:11px;flex:0 0 auto}
+  .d-appr .v{font-weight:600;font-size:15px}
+  .missing{color:var(--mut);font-style:italic;font-weight:400}
+
+  .whytoggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;
+    color:var(--dim);font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;font-weight:600;
+    background:var(--surf);border:1px solid var(--line);border-radius:13px;padding:14px}
+  .whytoggle:active{border-color:var(--goldline)}
+  .whytoggle .chev{transition:transform .25s}
+  .whytoggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .why{overflow:hidden;max-height:0;transition:max-height .32s ease}
+  .why.open{max-height:640px}
+  .why-in{padding-top:13px;display:flex;flex-direction:column;gap:11px}
+  .beat{display:flex;gap:11px}
+  .beat .bi{flex:0 0 20px;text-align:center;font-size:15px;line-height:1.35}
+  .beat .bl{font-size:10px;color:var(--mut)}
+  .beat.k .bl{color:var(--blue)} .beat.n .bl{color:var(--over)} .beat.d .bl{color:var(--under)}
+  .beat .bt{font-size:14.5px;margin-top:1px}
+  .beat.d .bt{color:var(--ivory);font-weight:600}
+
+  /* score block */
+  .scorewrap{margin-top:18px;background:linear-gradient(180deg,var(--surf),var(--surf2));
+    border:1px solid var(--line);border-radius:18px;padding:16px 16px 18px}
+  .scorewrap .sh{text-align:center;color:var(--mut);font-size:11px;margin-bottom:12px}
+  .stepper{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .stepbtn{flex:0 0 68px;height:68px;border-radius:20px;background:var(--raise);border:1px solid var(--line);
+    font-family:"Archivo";font-weight:800;font-size:34px;color:var(--gold);display:grid;place-items:center;line-height:1;
+    transition:transform .1s,background .15s}
+  .stepbtn:active{transform:scale(.92);background:#1c2748}
+  .scoreval{flex:1;text-align:center}
+  .scoreval .g{font-family:"Archivo";font-weight:800;font-size:64px;line-height:.9}
+  .scoreval .rel{font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--mut);margin-top:2px}
+  .scoreval .rel.under{color:var(--under)} .scoreval .rel.over{color:var(--over)}
+  .pts{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .pts .k{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--mut)}
+  .pts .v{font-family:"Archivo";font-weight:800;font-size:26px;color:var(--gold)}
+  .pts .strk{font-size:11px;color:var(--mut);font-family:"Oswald";letter-spacing:.06em;text-transform:uppercase}
+  .save{display:block;width:100%;margin-top:14px;text-align:center;font-family:"Oswald";text-transform:uppercase;
+    letter-spacing:.16em;font-weight:700;font-size:16px;color:var(--ink0);
+    background:linear-gradient(180deg,var(--gold),var(--gold2));border-radius:15px;padding:18px;
+    box-shadow:0 12px 26px -12px rgba(230,200,116,.5);transition:transform .12s,background .2s}
+  .save:active{transform:scale(.98)}
+  .save.done{background:linear-gradient(180deg,var(--under),#3fa76e);color:#04140b}
+
+  /* bottom nav */
+  .botnav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:linear-gradient(0deg,rgba(10,16,32,.98),rgba(10,16,32,.86));
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+  .navbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;height:52px;border-radius:14px;
+    background:var(--surf);border:1px solid var(--line);font-family:"Oswald";text-transform:uppercase;
+    letter-spacing:.1em;font-size:12.5px;font-weight:600;color:var(--dim)}
+  .navbtn:active{border-color:var(--goldline)} .navbtn[disabled]{opacity:.32}
+  .navpos{flex:0 0 auto;text-align:center;font-family:"Archivo";font-weight:800;font-size:15px;min-width:56px;color:var(--ivory)}
+  .navpos small{display:block;font-family:"Oswald";font-size:9px;letter-spacing:.14em;color:var(--mut);font-weight:500}
+
+  /* ---------- SUMMARY ---------- */
+  #summary{padding-top:max(46px,calc(env(safe-area-inset-top) + 26px));padding-bottom:40px}
+  .rc{text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.24em;color:var(--gold);font-size:13px;font-weight:600}
+  .rc2{text-align:center;font-family:"Oswald";font-weight:700;font-size:clamp(30px,9vw,42px);margin:6px 0 4px}
+  .rc3{text-align:center;color:var(--mut);font-size:13px;margin-bottom:22px}
+  .totrow{display:flex;gap:11px;margin-bottom:11px}
+  .tot{flex:1;background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--line);border-radius:15px;padding:16px 12px;text-align:center}
+  .tot.hero{border-color:var(--goldline)}
+  .tot .k{font-family:"Oswald";text-transform:uppercase;letter-spacing:.13em;font-size:10px;color:var(--mut)}
+  .tot .v{font-family:"Archivo";font-weight:800;font-size:34px;margin-top:3px}
+  .tot .v.gold{color:var(--gold)} .tot .v.under{color:var(--under)} .tot .v.over{color:var(--over)}
+  .nine{display:flex;gap:11px;margin-bottom:22px}
+  .nine .n9{flex:1;background:var(--surf2);border:1px solid var(--line);border-radius:13px;padding:12px;text-align:center}
+  .nine .n9 .k{font-family:"Oswald";text-transform:uppercase;letter-spacing:.13em;font-size:10px;color:var(--mut)}
+  .nine .n9 .v{font-family:"Archivo";font-weight:800;font-size:22px;margin-top:2px}
+  .sctitle{font-family:"Oswald";text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--gold);margin:6px 0 12px;font-weight:600}
+  .card-tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  .card-tbl th,.card-tbl td{padding:8px 4px;text-align:center;border-bottom:1px solid var(--line);font-family:"Archivo";font-weight:700;font-size:13px}
+  .card-tbl th{font-family:"Oswald";font-weight:500;font-size:10px;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
+  .card-tbl td.hn{color:var(--mut);font-weight:600}
+  .card-tbl .sc.u{color:var(--under)} .card-tbl .sc.o{color:var(--over)}
+  .card-tbl tr.tot9 td{background:rgba(255,255,255,.03);color:var(--gold)}
+  .missnote{background:rgba(63,131,189,.1);border:1px solid rgba(63,131,189,.26);border-radius:11px;
+    padding:10px 13px;font-size:11.5px;color:#a9c4de;margin:18px 0 8px;line-height:1.6}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===== START ===== -->
+<section class="screen pad" id="start">
+  <div class="crest">★ &nbsp;RYDER-ÅND · SKÅNE 2026&nbsp; ★</div>
+  <div class="word">TEAM <em>EUROPE</em></div>
+  <div class="word2">Course Management</div>
+  <div class="hair"></div>
+  <div class="pgrid" id="pgrid"></div>
+  <div class="startfoot">Vælg dig selv — dit valg huskes på telefonen.<br>Skyrup Golf &amp; Hotell · Par 71 · gul tee</div>
+</section>
+
+<!-- ===== HOME ===== -->
+<section class="screen pad" id="home"></section>
+
+<!-- ===== HOLE ===== -->
+<section class="screen" id="hole">
+  <div class="statusbar">
+    <div class="sb-brand">TEAM <b>EUROPE</b></div>
+    <div class="sb-live" id="sblive"></div>
+  </div>
+  <div class="holebody pad" id="holebody"></div>
+  <div class="botnav">
+    <button class="navbtn" id="navprev">← <span id="prevlab">Forrige</span></button>
+    <div class="navpos"><span id="navnum">1</span><small>/ 18</small></div>
+    <button class="navbtn" id="navnext"><span id="nextlab">Næste</span> →</button>
+  </div>
+</section>
+
+<!-- ===== SUMMARY ===== -->
+<section class="screen pad" id="summary"></section>
+
+<script>
+const PLAYERS=[
+ {id:"oscar",name:"Oscar Mogensen",first:"Oscar",hcp:4.9,tier:"a"},
+ {id:"bo",name:"Bo Sannung",first:"Bo",hcp:9.1,tier:"a"},
+ {id:"mathias",name:"Mathias M. Rosenkrantz",first:"Mathias",hcp:10.1,tier:"a"},
+ {id:"lasse",name:"Lasse Rune Birk",first:"Lasse",hcp:16.2,tier:"t"},
+ {id:"thomas",name:"Thomas Müllertz",first:"Thomas",hcp:19,tier:"t"},
+ {id:"dennis",name:"Dennis Andersen",first:"Dennis",hcp:23.8,tier:"g"},
+ {id:"martin",name:"Martin Andersen",first:"Martin",hcp:25,tier:"g"},
+ {id:"christopher",name:"Christopher Solhøj",first:"Christopher",hcp:36,tier:"g"},
+];
+const ROLE={a:{t:"Angriber",c:"a"},t:{t:"Taktiker",c:"t"},g:{t:"Grinder",c:"g"}};
+const RDESC={
+ a:"Du har spillet til at score — men Skyrup straffer aggression. Vælg dine øjeblikke, respektér vandet.",
+ t:"Positionsgolf er dit våben. Driveren bliver i baggen; bogey på de svære er planen, ikke nederlaget.",
+ g:"Din opgave er point, ikke pars. Undgå de store tal, tag dine slag, og du samler stableford ind."
+};
+const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
+
+// tee.club / target / miss / approach — fra eksisterende Skyrup-caddiedata (aflæst 18 hulkort). Intet opdigtet.
+const HOLES=[
+ {n:1,par:4,idx:6,len:310,tee:{club:"5-wood",target:"Højre-center",miss:"Højre — OB/bæk hele venstre"},approach:"Wedge → center green",haz:'<span class="w">Bæk/OB langs HELE venstre</span> · bunkers højre',
+  why:{a:{k:"Kort åbningshul — driver og en kort pitch ind.",n:"Driver mod OB venstre: én lille træk og du ligger ude af banen.",d:"5-wood til fairway, wedge tæt. Åbn med en chance, ikke en straf."},
+       t:{k:"Bare kom i gang — tag driveren.",n:"Ikke driver — venstre er OB fra første sving, og kroppen er kold.",d:"5-wood højre-center, wedge til midten. Rolig par mens du varmer op."},
+       g:{k:"Nu skal jeg bare ramme noget.",n:"Ikke et vildt slag mod OB'en venstre.",d:"To trygge slag ned ad højre, pitch på. Du har slag her — net par er guld."}}},
+ {n:2,par:4,idx:4,len:345,tee:{club:"5-wood",target:"Center",miss:"Højre — tæt skov venstre"},approach:"Kort jern → venstre for green (dam højre)",haz:'Tæt skov HELE venstre · <span class="w">dam højre kort før green</span>',
+  why:{a:{k:"Fairwayen buer højre — jeg genner hjørnet med driver.",n:"Ikke flirte med skoven venstre for at spare meter.",d:"5-wood center, kort jern til VENSTRE for green — dammen er højre."},
+       t:{k:"Længere hul, jeg har brug for driver.",n:"Ikke sigte venstre — skoven æder den.",d:"5-wood center, sigt greenens venstre halvdel væk fra dammen. Bogey er fint."},
+       g:{k:"Langt hul, jeg presser.",n:"Ikke gå efter green over dammen højre.",d:"Tre slag ned ad midten, læg op, pitch på. Slag-hul = net par."}}},
+ {n:3,par:3,idx:18,len:125,tee:{club:"Kort jern",target:"Center green",miss:"Bunkers rundt — sigt midten"},approach:null,haz:'Green med bunkers · intet vand · letteste hul',
+  why:{a:{k:"Kort par-3 — flaget kalder.",n:"Ikke prikke et flag der sidder bag en bunker.",d:"Kort jern til center. Birdie-hullet — tag putten."},
+       t:{k:"Endelig et kort et.",n:"Ikke blive grådig mod kanten.",d:"Jern til midten, to-put par. Nemt point."},
+       g:{k:"Kort — det kan jeg.",n:"Ikke stresse over bunkerne.",d:"Sigt midten af green. Par er inden for rækkevidde her."}}},
+ {n:4,par:5,idx:10,len:465,tee:{club:"5-wood",target:"Center",miss:"Højre — vand v. green"},approach:"Lay-up → wedge fra højre",haz:'<span class="w">Vand venstre-front af green</span> · fairwaybunkers · kort par-5',
+  why:{a:{k:"Kort par-5 — den når jeg i to.",n:"Ikke gå for green over vandet venstre-front.",d:"Kom til HØJRE for green-vandet, wedge tæt. Eagle-put slår en våd bold."},
+       t:{k:"Måske kan jeg nå den.",n:"Ikke tvinge et langt 2. slag mod vandet.",d:"5-wood → 5-wood → wedge. Disciplin giver en birdie-chance."},
+       g:{k:"Par-5 — nu smækker jeg.",n:"Ikke jag distance mod green-vandet.",d:"Tre-fire rolige slag, wedge fra højre. Net birdie er realistisk."}}},
+ {n:5,par:4,idx:12,len:335,tee:{club:"5-wood",target:"Kort af fairway-dammen",miss:"Læg kort — dam i landingszonen"},approach:"Wedge → venstre for green-dam",haz:'<span class="w">Dam MIDT i fairway</span> (landingszone) · dam kort-højre for green',
+  why:{a:{k:"Åben fairway — driver frem.",n:"Driveren lander lige I dammen midt i fairwayen.",d:"5-wood KORT af vandet, wedge ind. Position slår længde her."},
+       t:{k:"Kort par-4, driver og wedge.",n:"Ikke driver — vandet ligger i din landingszone.",d:"5-wood kort af dammen, kort jern venstre for green-vandet."},
+       g:{k:"Jeg tager en stor en.",n:"Ikke smække mod vandet i fairwayen.",d:"To korte slag udenom dammen. Bogey er en fin score."}}},
+ {n:6,par:3,idx:16,len:135,tee:{club:"Jern — rigelig kølle",target:"Center green",miss:"Vand begge sider — tag nok kølle"},approach:null,haz:'<span class="w">Vand på BEGGE sider af green</span> · tag nok kølle',
+  why:{a:{k:"Kort — jeg dropper den tæt.",n:"Ikke komme kort; vandet venter foran og ved siden.",d:"Rigelig kølle til center. Fuglen er der, men tag greenen først."},
+       t:{k:"Kort par-3.",n:"Ikke bail-out mod vandet i siderne.",d:"Nok kølle, center green. Par er stærkt."},
+       g:{k:"Kort hul, fint.",n:"Ikke lægge den kort ned i vandet.",d:"Tag én kølle mere, sigt midten. Vandet straffer den korte."}}},
+ {n:7,par:4,idx:8,len:330,tee:{club:"5-wood",target:"Center",miss:"Højre — sø venstre v. green"},approach:"Kort jern → højre halvdel af green",haz:'<span class="w">Stor sø VENSTRE for green</span> · fairwaybunkers',
+  why:{a:{k:"Kort — jeg angriber flaget.",n:"Ikke sigte venstre mod søen ved green.",d:"5-wood af tee, indspil til HØJRE halvdel. Søen venstre er død."},
+       t:{k:"Driver frem.",n:"Ikke lade indspillet drive venstre mod vandet.",d:"5-wood center, spil til højre for flaget."},
+       g:{k:"Nu presser jeg.",n:"Ikke gå efter green venstre over vand.",d:"Læg op kort, pitch fra højre. Undgå søen, tag point."}}},
+ {n:8,par:4,idx:2,len:380,tee:{club:"5-wood",target:"Kort af cross-bækken",miss:"Højre"},approach:"Langt jern ind",haz:'<span class="w">Bæk KRYDSER fairwayen</span> i layup · dam venstre · 2.-hårdeste',
+  why:{a:{k:"Langt idx 2 — jeg skal bruge længde.",n:"Driveren når bækken der krydser fairwayen.",d:"5-wood KORT af bækken, langt jern ind. Par slår alle her."},
+       t:{k:"Svært hul, tag driver.",n:"Ikke smække i bækken over fairwayen.",d:"5-wood kort af vandet. Accepter bogey, jag ikke."},
+       g:{k:"Langt — jeg svinger hårdt.",n:"Ikke lange slag lige i bækken.",d:"Tre slag i spil, kort af bækken. Du får slag — net par er muligt."}}},
+ {n:9,par:4,idx:14,len:300,tee:{club:"5-wood",target:"Højre-center",miss:"Højre — damme venstre"},approach:"Wedge",haz:'<span class="w">Damme langs VENSTRE fairway</span> · kort par-4',
+  why:{a:{k:"300 m — næsten drivbar.",n:"Ikke sigte venstre; damme langs hele siden.",d:"5-wood højre-center, wedge tæt. Birdie uden risiko."},
+       t:{k:"Kort, driver frem.",n:"Ikke mod vandet venstre.",d:"5-wood væk fra vand venstre, kort jern ind."},
+       g:{k:"Kort hul, chance.",n:"Ikke drift venstre i vandet.",d:"Højre side hele vejen, pitch på."}}},
+ {n:10,par:5,idx:11,len:465,tee:{club:"5-wood",target:"Kort af fairway-dammene",miss:"Læg kort af vandet"},approach:"Lay-up → wedge",haz:'<span class="w">To damme i fairwayen</span> (2.-slags-zonen) · kort par-5',
+  why:{a:{k:"Kort par-5 — i to igen.",n:"Ikke tvinge 2. slag blindt mellem dammene.",d:"Placér 2. slag kort af vandet, wedge ind. Birdie."},
+       t:{k:"Jeg går for den.",n:"Ikke over vand du ikke når.",d:"5-wood → lay kort af vandet → wedge. Tålmodighed."},
+       g:{k:"Par-5, smæk.",n:"Ikke mod damme du ikke rækker.",d:"Tre-fire slag, læg op. Net birdie."}}},
+ {n:11,par:3,idx:9,len:175,tee:{club:"5-wood / langt jern",target:"Center green",miss:"Foran green"},approach:null,haz:'Længste par-3 · bunkers begge sider · træer venstre',
+  why:{a:{k:"Langt par-3 — jeg nagler den.",n:"Ikke overpower; bunkers begge sider.",d:"Langt jern/5-wood til center. Par er godt."},
+       t:{k:"Langt et.",n:"Ikke tvinge mod flaget.",d:"Nok kølle, center. Bogey er ingen skam."},
+       g:{k:"Langt — svært.",n:"Ikke jag hele vejen i ét slag.",d:"Læg foran green, pitch+put. Slag-hul = net par."}}},
+ {n:12,par:4,idx:1,len:375,tee:{club:"5-wood",target:"Mellem dammene",miss:"Damme begge sider — placér"},approach:"Langt jern ind",haz:'<span class="w">Damme VENSTRE og HØJRE i landing</span> · vand nær green · BANENS HÅRDESTE',
+  why:{a:{k:"Idx 1 — driveren skal ud.",n:"Driveren finder dammene venstre/højre i landingen.",d:"5-wood placeret mellem vandet. Par vinder hullet."},
+       t:{k:"Hårdest — jeg må presse.",n:"Ikke driver mod damme på begge sider.",d:"5-wood sikkert i spil, langt jern ind. Bogey = sejr."},
+       g:{k:"Banens sværeste, uh.",n:"Ikke helteslag mod vandet.",d:"Tre-fire trygge slag. Du får slag (måske to) — net par/bogey."}}},
+ {n:13,par:4,idx:3,len:365,tee:{club:"5-wood",target:"Center, foran dammene",miss:"Kort af vandet"},approach:"Kort jern ind",haz:'<span class="w">Damme på BEGGE sider</span> midt-fairway · træer',
+  why:{a:{k:"Jeg smækker forbi vandet.",n:"Ikke bomme længde mod damme på begge sider.",d:"5-wood center, foran dammene. Præcision > længde."},
+       t:{k:"Svært, tag driver.",n:"Ikke prøve at nå mellem vandet med driver.",d:"5-wood mellem vandet, kort ind. Bogey ok."},
+       g:{k:"Vand alle vegne.",n:"Ikke helteslag.",d:"Læg kort af vandet. Slag-hul, net par."}}},
+ {n:14,par:3,idx:13,len:140,tee:{club:"Jern — rigelig kølle",target:"Højre/center green",miss:"Højre — sø hele venstre"},approach:null,haz:'<span class="w">Stor sø hele VENSTRE</span> · green hævet højre bag stenmur',
+  why:{a:{k:"Greenen er lige der — jeg fyrer på flaget.",n:"Ikke sigte venstre; hele siden er sø.",d:"Nok kølle til greenens højre/center. Aldrig venstre."},
+       t:{k:"Kort par-3.",n:"Ikke bail venstre mod søen.",d:"Sigt højre halvdel, rigelig kølle."},
+       g:{k:"Vand hele venstre — nervøs.",n:"Ikke sigte mod flaget hvis det står venstre.",d:"Spil sikkert til højre — hellere bunker end sø."}}},
+ {n:15,par:4,idx:7,len:320,tee:{club:"5-wood / hybrid",target:"Center (smal chute)",miss:"Center — træer begge sider"},approach:"Kort jern",haz:'Smal tree-chute begge sider · greenbunker højre',
+  why:{a:{k:"Kort — driver ned ad slugten.",n:"Ikke driver i en smal tree-chute.",d:"5-wood/hybrid ren center, wedge tæt."},
+       t:{k:"Kort hul, driver.",n:"Ikke risikere træerne på begge sider.",d:"Præcision fra tee — center, kort jern."},
+       g:{k:"Smalt — uh.",n:"Ikke tvinge længde mellem træerne.",d:"Sikkert ned ad midten i to, pitch på. Net par."}}},
+ {n:16,par:4,idx:17,len:315,tee:{club:"5-wood",target:"Højre for dammen",miss:"Højre"},approach:"Wedge — angrib green",haz:'<span class="w">Dam midt-venstre</span> i fairway · ellers venligt',
+  why:{a:{k:"Venligt hul — jeg angriber.",n:"Ikke drift venstre i dammen.",d:"Højre for dammen, wedge — angrib green."},
+       t:{k:"Chance-hul.",n:"Ikke mod vandet venstre.",d:"5-wood højre for vandet, kort jern."},
+       g:{k:"Et venligere et.",n:"Ikke venstre i dammen.",d:"Højre side, tag din chance for point."}}},
+ {n:17,par:4,idx:5,len:360,tee:{club:"5-wood / driver",target:"Højre-center",miss:"Højre — sø venstre"},approach:"Green",haz:'<span class="w">Stor sø VENSTRE for fairway</span> · træer venstre · greenbunkers',
+  why:{a:{k:"Jeg tager driver ned ad venstre linje.",n:"Venstre linje ER søen — dødt.",d:"5-wood/driver højre-center, ALT væk fra venstre."},
+       t:{k:"Svært hul sent i runden.",n:"Ikke flirte med søen venstre.",d:"Fairway over længde. Bogey her er guld."},
+       g:{k:"Vand venstre, træt nu.",n:"Ikke jag et slag mod vandet.",d:"Spil langt til højre for søen. Slag-hul — tag point trygt."}}},
+ {n:18,par:5,idx:15,len:460,tee:{club:"5-wood",target:"Venstre for vandet",miss:"Venstre — vand højre-center"},approach:"Lay-up → wedge",haz:'<span class="w">Vand højre-center i layup-zonen</span> · træer venstre · afslutning',
+  why:{a:{k:"Jeg afslutter med en birdie i to.",n:"Ikke lay-up lige ind i vandet højre-center.",d:"Lay VENSTRE for vandet, wedge til en birdie-finish."},
+       t:{k:"Sidste hul — pres på.",n:"Ikke mod vandet højre.",d:"5-wood → lay venstre for vandet → wedge. Slut stærkt."},
+       g:{k:"Sidste hul!",n:"Ikke et vildt slag mod vandet.",d:"Tre rolige slag venstre for vandet, pitch på. Net birdie-finale."}}},
+];
+
+/* ---------- state ---------- */
+const LS_P="te_player", LS_R=id=>"te_round_"+id;
+const LS={get:k=>{try{return localStorage.getItem(k);}catch(e){return null;}},
+         set:(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}},
+         del:k=>{try{localStorage.removeItem(k);}catch(e){}}};
+const FORCED_PLAYER="martin"; /* personlige links sætter denne til en spiller-id */
+let player=null, scores=[], saved=[], cur=0;
+
+function strokesOn(hcp,idx){const h=Math.round(hcp);let s=0;if(h>=idx)s++;if(h>=idx+18)s++;return s;}
+function loadRound(id){try{const r=JSON.parse(LS.get(LS_R(id)));if(r&&r.scores){scores=r.scores;saved=r.saved;return;}}catch(e){}
+  scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);}
+function saveRound(){if(player)LS.set(LS_R(player.id),JSON.stringify({scores,saved}));}
+function points(i){const h=HOLES[i];const net=scores[i]-strokesOn(player.hcp,h.idx);const p=2+h.par-net;return p<0?0:p;}
+function playedIdx(){return saved.map((s,i)=>s?i:-1).filter(i=>i>=0);}
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+
+/* ---------- start ---------- */
+function renderStart(){
+  const g=document.getElementById('pgrid');g.innerHTML='';
+  PLAYERS.forEach(p=>{
+    const hc=String(p.hcp).replace('.',',');
+    const b=document.createElement('button');b.className='pcard';
+    b.innerHTML=`<div class="pini ${p.tier}">${p.first[0]}</div>
+      <div class="pname"><b>${p.name}</b><span>${ROLE[p.tier].t}</span></div>
+      <div class="phcp">${hc}<small>HCP</small></div>`;
+    b.onclick=()=>{choosePlayer(p.id,true);};
+    g.appendChild(b);
+  });
+}
+function choosePlayer(id,remember){
+  player=PLAYERS.find(p=>p.id===id);if(!player)return;
+  if(remember)LS.set(LS_P,id);
+  loadRound(id);renderHome();show('home');
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const el=document.getElementById('home');const r=ROLE[player.tier];
+  const inProg=playedIdx().length>0 && playedIdx().length<18;
+  const done=playedIdx().length===18;
+  let live='';
+  if(inProg||done){const pi=playedIdx();const gross=pi.reduce((a,i)=>a+scores[i],0);const par=pi.reduce((a,i)=>a+HOLES[i].par,0);
+    const pts=pi.reduce((a,i)=>a+points(i),0);const rel=gross-par;
+    live=`<div class="course"><div class="cstat"><div class="k">Thru</div><div class="v">${pi.length}</div></div>
+      <div class="cstat"><div class="k">Mod par</div><div class="v ${rel<0?'':''}" style="color:${rel<0?'var(--under)':rel>0?'var(--over)':'var(--ivory)'}">${rel>0?'+'+rel:rel}</div></div>
+      <div class="cstat"><div class="k">Point</div><div class="v" style="color:var(--gold)">${pts}</div></div></div>`;}
+  el.innerHTML=`
+    <div class="hi">God tur</div>
+    <div class="hname">${player.first}</div>
+    <span class="role ${r.c}">${r.t} · HCP ${String(player.hcp).replace('.',',')}</span>
+    <p class="rdesc">${RDESC[player.tier]}</p>
+    ${live}
+    <div style="flex:1"></div>
+    <div style="margin-top:26px">
+      ${done?`<button class="big-btn" id="goSum">SE ROUND SUMMARY</button>`
+      :inProg?`<button class="big-btn" id="cont">FORTSÆT · HUL ${playedIdx().length+1}</button>
+               <button class="ghost" id="restart">START FORFRA</button>`
+      :`<button class="big-btn" id="startRound">START ROUND</button>`}
+      ${FORCED_PLAYER?'':'<button class="switch" id="switchP">Skift spiller</button>'}
+    </div>`;
+  const q=id=>document.getElementById(id);
+  if(q('startRound'))q('startRound').onclick=()=>{cur=0;openHole();};
+  if(q('cont'))q('cont').onclick=()=>{cur=Math.min(playedIdx().length,17);openHole();};
+  if(q('restart'))q('restart').onclick=()=>{if(confirm('Nulstil scoren og start forfra?')){scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);saveRound();cur=0;openHole();}};
+  if(q('goSum'))q('goSum').onclick=()=>renderSummary();
+  if(q('switchP'))q('switchP').onclick=()=>{LS.del(LS_P);show('start');};
+}
+
+/* ---------- hole ---------- */
+function openHole(){renderHole();show('hole');}
+function renderLive(){
+  const pi=playedIdx();const el=document.getElementById('sblive');
+  if(pi.length===0){el.innerHTML=`<span class="u" style="color:var(--mut)">Ny runde</span>`;return;}
+  const gross=pi.reduce((a,i)=>a+scores[i],0);const par=pi.reduce((a,i)=>a+HOLES[i].par,0);
+  const pts=pi.reduce((a,i)=>a+points(i),0);const rel=gross-par;
+  el.innerHTML=`<span class="u">${pi.length}<small>thru</small></span>
+    <span class="u ${rel<0?'under':rel>0?'over':''}">${rel>0?'+'+rel:rel}<small>par</small></span>
+    <span class="u" style="color:var(--gold)">${pts}<small>pts</small></span>`;
+}
+function renderHole(){
+  const h=HOLES[cur];const w=h.why[player.tier];const strk=strokesOn(player.hcp,h.idx);
+  renderLive();
+  document.getElementById('navnum').textContent=h.n;
+  const pv=document.getElementById('navprev'),nx=document.getElementById('navnext');
+  pv.disabled=cur===0; nx.disabled=false;
+  document.getElementById('prevlab').textContent=cur===0?'':('Hul '+HOLES[cur-1].n);
+  document.getElementById('nextlab').textContent=cur===17?'Summary':('Hul '+HOLES[cur+1].n);
+
+  const appr = h.approach ? `<div class="d-appr"><span class="k lab">Approach</span><span class="v">${h.approach}</span></div>`
+    : (h.par===3?'':`<div class="d-appr"><span class="k lab">Approach</span><span class="v missing">— egne yardages</span></div>`);
+
+  document.getElementById('holebody').innerHTML=`
+    <div class="hhead">
+      <div class="hno">HOLE ${h.n}</div>
+      <div class="hmeta">PAR <b>${h.par}</b> · <b>${h.len}</b> M<br>INDEX <b>${h.idx}</b></div>
+    </div>
+    <div class="hazbar">⚑ ${h.haz}</div>
+    <div class="decide">
+      <div class="d-eyebrow lab">Tee</div>
+      <div class="d-club">${h.tee.club}</div>
+      <div class="d-row">
+        <div class="d-cell"><div class="k lab">Target</div><div class="v">${h.tee.target}</div></div>
+        <div class="d-cell miss"><div class="k lab">Safe miss</div><div class="v">${h.tee.miss}</div></div>
+      </div>
+      ${appr}
+    </div>
+    <button class="whytoggle" id="whyBtn" aria-expanded="false">Hvorfor? · Se strategi <span class="chev">▾</span></button>
+    <div class="why" id="whyBox"><div class="why-in">
+      <div class="beat k"><div class="bi">🧠</div><div class="bt"><div class="bl lab">Det du tænker</div>${w.k}</div></div>
+      <div class="beat n"><div class="bi">🚫</div><div class="bt"><div class="bl lab">Det du IKKE skal gøre</div>${w.n}</div></div>
+      <div class="beat d"><div class="bi">✅</div><div class="bt"><div class="bl lab">Gør i stedet</div>${w.d}</div></div>
+    </div></div>
+
+    <div class="scorewrap">
+      <div class="sh lab">Din score · Hul ${h.n}</div>
+      <div class="stepper">
+        <button class="stepbtn" id="minus">−</button>
+        <div class="scoreval"><div class="g num" id="gross">${scores[cur]}</div><div class="rel lab" id="rel"></div></div>
+        <button class="stepbtn" id="plus">+</button>
+      </div>
+      <div class="pts">
+        <span class="k">Stableford</span><span class="v num" id="pts">0</span>
+        <span class="strk" id="strk"></span>
+      </div>
+      <button class="save lab" id="saveBtn">${saved[cur]?'GEMT ✓ · NÆSTE HUL':'GEM &amp; NÆSTE HUL'}</button>
+    </div>`;
+
+  const upd=()=>{
+    document.getElementById('gross').textContent=scores[cur];
+    const rel=scores[cur]-h.par;const relEl=document.getElementById('rel');
+    relEl.textContent=rel===0?'PAR':rel>0?'+'+rel+' OVER':rel+' UNDER';
+    relEl.className='rel lab '+(rel<0?'under':rel>0?'over':'');
+    document.getElementById('pts').textContent=points(cur);
+    document.getElementById('strk').textContent=strk===0?'· intet slag':strk===1?'· 1 slag':'· 2 slag';
+  };
+  upd();
+  const q=id=>document.getElementById(id);
+  q('minus').onclick=()=>{if(scores[cur]>1){scores[cur]--;upd();saveRound();markUnsaved();}};
+  q('plus').onclick=()=>{if(scores[cur]<15){scores[cur]++;upd();saveRound();markUnsaved();}};
+  function markUnsaved(){const b=q('saveBtn');b.classList.remove('done');b.innerHTML='GEM &amp; NÆSTE HUL';}
+  q('whyBtn').onclick=()=>{const box=q('whyBox'),b=q('whyBtn');const open=box.classList.toggle('open');b.setAttribute('aria-expanded',open);};
+  q('saveBtn').onclick=()=>{
+    saved[cur]=true;saveRound();const b=q('saveBtn');b.classList.add('done');b.innerHTML='GEMT ✓';
+    renderLive();
+    setTimeout(()=>{ if(cur===17){renderSummary();} else {cur++;openHole();} },260);
+  };
+}
+document.getElementById('navprev').onclick=()=>{if(cur>0){cur--;openHole();}};
+document.getElementById('navnext').onclick=()=>{if(cur<17){cur++;openHole();}else{renderSummary();}};
+
+/* ---------- summary ---------- */
+function renderSummary(){
+  const pi=playedIdx();
+  const front=[...Array(9).keys()], back=[...Array(9).keys()].map(i=>i+9);
+  const sum=arr=>arr.reduce((a,i)=>({g:a.g+scores[i],p:a.p+HOLES[i].par,pt:a.pt+points(i)}),{g:0,p:0,pt:0});
+  const F=sum(front),B=sum(back),T={g:F.g+B.g,p:F.p+B.p,pt:F.pt+B.pt};
+  const rel=T.g-T.p;
+  function nineTable(arr,title,tot){
+    const cells=fn=>arr.map(fn).join('');
+    return `<div class="sctitle" style="margin-top:16px">${title}</div>
+    <div style="overflow-x:auto"><table class="card-tbl"><tbody>
+      <tr><td class="hn">Hul</td>${cells(i=>`<td class="hn">${HOLES[i].n}</td>`)}<td class="hn">Σ</td></tr>
+      <tr><td class="hn">Par</td>${cells(i=>`<td class="hn" style="color:var(--mut)">${HOLES[i].par}</td>`)}<td class="hn">${tot.p}</td></tr>
+      <tr class="tot9"><td>Score</td>${cells(i=>{const r=scores[i]-HOLES[i].par;return `<td class="sc ${r<0?'u':r>0?'o':''}">${scores[i]}</td>`;})}<td>${tot.g}</td></tr>
+      <tr><td class="hn">Pts</td>${cells(i=>`<td style="color:var(--gold)">${points(i)}</td>`)}<td style="color:var(--gold)">${tot.pt}</td></tr>
+    </tbody></table></div>`;
+  }
+  document.getElementById('summary').innerHTML=`
+    <div class="rc">Round Complete</div>
+    <div class="rc2">${player.first} · Skyrup</div>
+    <div class="rc3">${pi.length<18?pi.length+' huller spillet · ':''}Par ${COURSE.par} · gul tee</div>
+    <div class="totrow">
+      <div class="tot hero"><div class="k">Score</div><div class="v gold num">${T.g}</div></div>
+      <div class="tot"><div class="k">Mod par</div><div class="v num ${rel<0?'under':rel>0?'over':''}">${rel>0?'+'+rel:rel===0?'E':rel}</div></div>
+      <div class="tot hero"><div class="k">Stableford</div><div class="v gold num">${T.pt}</div></div>
+    </div>
+    <div class="nine">
+      <div class="n9"><div class="k">Front 9</div><div class="v num">${F.g}</div></div>
+      <div class="n9"><div class="k">Back 9</div><div class="v num">${B.g}</div></div>
+    </div>
+    ${nineTable(front,'Forsiden · 1–9',F)}
+    ${nineTable(back,'Bagsiden · 10–18',B)}
+    <div class="missnote">ⓘ Stableford er beregnet ud fra spillehandicap ≈ dit handicap (Skyrups slope/CR findes ikke i datagrundlaget, så point er tilnærmet). Farer og linjer er aflæst fra klubbens 18 hulkort — intet er opdigtet.</div>
+    <div style="margin-top:12px"><button class="ghost" id="backHome">← Tilbage til ${player.first}</button></div>`;
+  document.getElementById('backHome').onclick=()=>{renderHome();show('home');};
+  show('summary');
+}
+
+/* ---------- boot / routing ---------- */
+function boot(){
+  renderStart();
+  if(FORCED_PLAYER && PLAYERS.some(p=>p.id===FORCED_PLAYER)){choosePlayer(FORCED_PLAYER,true);return;}
+  const params=new URLSearchParams(location.search);
+  const hash=location.hash.replace(/^#/,'');
+  const hp=new URLSearchParams(hash.includes('=')?hash:('p='+hash));
+  const deep=params.get('player')||params.get('p')||hp.get('player')||hp.get('p');
+  if(deep && PLAYERS.some(p=>p.id===deep)){choosePlayer(deep,true);return;}
+  const remembered=LS.get(LS_P);
+  if(remembered && PLAYERS.some(p=>p.id===remembered)){choosePlayer(remembered,false);return;}
+  show('start');
+}
+boot();
+</script>
+</body>
+</html>
