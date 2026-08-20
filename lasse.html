@@ -249,8 +249,10 @@
   .ph-opt.godt{border-color:rgba(99,205,144,.45)} .ph-opt.okay{border-color:rgba(232,180,95,.45)} .ph-opt.daarligt{border-color:rgba(235,115,110,.5)}
   .ph-coach{border-radius:17px;padding:21px;border:1px solid var(--line);background:var(--surf);margin-bottom:18px}
   .ph-coach.godt{border-color:rgba(99,205,144,.45)} .ph-coach.okay{border-color:rgba(232,180,95,.45)} .ph-coach.daarligt{border-color:rgba(235,115,110,.5)}
-  .ph-ct{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:20px;margin-bottom:11px}
-  .ph-coach.godt .ph-ct{color:var(--under)} .ph-coach.okay .ph-ct{color:#e8b45f} .ph-coach.daarligt .ph-ct{color:#f0908c}
+  .ph-mood{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:600;margin-bottom:9px}
+  .ph-coach.godt .ph-mood{color:var(--under)} .ph-coach.okay .ph-mood{color:#e8b45f} .ph-coach.daarligt .ph-mood{color:#f0908c}
+  .ph-by{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:17px;color:var(--ivory);margin-bottom:11px}
+  .ph-by b{color:var(--gold)}
   .ph-cc{font-size:15px;color:var(--dim);line-height:1.65}
   .ph-cc b{color:var(--ivory)}
   .ph-go{display:block;width:100%;text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.16em;
@@ -345,11 +347,37 @@ const KEND={
  t:"Position slår længde. Bogey på de svære er point i banken.",
  g:"Du får slag på de svære huller — spil dem sikkert for net par, så scorer du."
 };
-const MOOD={
- godt:{t:"Godt spillet 👊",c:"Nyd det ét sekund — og slip det så. Næste hul er et nyt hul, og din næste beslutning er den eneste der tæller. Bliv i din proces, ikke i scoren — så holder momentum."},
- okay:{t:"Helt fint 👍",c:"Golf er ikke 18 perfekte huller — det er at holde skaden lav. Du er stadig i din plan. På næste tee: én klar beslutning, ram dit target, videre."},
- daarligt:{t:"Ét hul. Ét datapunkt.",c:"Det var ikke en tendens, ikke din dag, ikke dig.<br><br><b>1.</b> Tre langsomme vejrtrækninger — sænk pulsen, ikke tanken.<br><b>2.</b> Sig det højt: “det hul er ovre.”<br><b>3.</b> Næste tee: det mindst ambitiøse, sikreste slag — vind roen tilbage med én god beslutning, ikke en helteredning.<br><br>Skaden kommer næsten altid på <b>det næste hul</b>. Din værdi ligger i det næste slag — aldrig i det sidste."}
-};
+const MLABEL={godt:"🟢 Godt",okay:"🟡 Okay",daarligt:"🔴 Dårligt"};
+const LEGENDS=[
+ {n:"Tiger Woods",
+  godt:"Tiger tillod sig kun ét sekunds fejring — så var blikket fremad. Bliv i din boble og tag den næste beslutning lige så skarpt.",
+  okay:"Tiger vandt på solide runder, ikke mirakler — ved at fjerne de store fejl. Du er i din plan. Samme rutine, videre.",
+  daarligt:"Earl Woods' regel: vær lige så frustreret du vil — men <b>kun til du har gået ti skridt fra bolden.</b> Så er følelsen udløbet. Gå de ti skridt, slip det helt, og forpligt dig 100% til det sikreste næste slag. Tiger lavede dobbeltbogeys og vandt alligevel."},
+ {n:"Rory McIlroy",
+  godt:"Rory: nyd det — og bliv tålmodig. Runden er lang; én god beslutning ad gangen.",
+  okay:"Rory: tålmodighed er et våben. Bliv i processen, point kommer af sig selv.",
+  daarligt:"Rory siger: du skal være din egen bedste ven derude. Skæld ikke dig selv ud — ét hul definerer ikke din runde. Ånd ud, vær venlig mod dig selv, og spil det næste slag med fuld ro. Rory har vendt de værste starter til sejre."},
+ {n:"Jack Nicklaus",
+  godt:"Nicklaus: ét godt hul beviser intet endnu. Bliv ydmyg, bliv skarp.",
+  okay:"Nicklaus vandt 18 majors med management, ikke magi. Spil klogt, videre.",
+  daarligt:"Nicklaus lod aldrig ét hul rasle ham. Han sagde: 'jeg 3-puttede aldrig i mit hoved.' Se det næste slag lykkes FØR du slår det — tydeligt, positivt — og udfør din plan. Ét dårligt hul er glemt, før du når næste tee."},
+ {n:"Seve Ballesteros",
+  godt:"Seve: spil med hjertet — men behold hovedet koldt til næste slag.",
+  okay:"Seve fandt altid en vej. Bliv kreativ, bliv i kampen.",
+  daarligt:"Seve reddede par fra parkeringspladser. Hans tro: der er ALTID en vej ud. Et dårligt hul er ikke slutningen — det er en invitation til at vise, hvor sej du er. Ryst det af, og tro på det næste slag."},
+ {n:"Gary Player",
+  godt:"Gary Player: positivitet er en beslutning. Vælg den, og gå selvsikkert videre.",
+  okay:"Player: 'jo hårdere jeg arbejder, jo heldigere bliver jeg.' Bliv ved, tålmodigt.",
+  daarligt:"Gary Player så altid modgang som en mulighed. Et dårligt hul er en test af din holdning, ikke dit sving. Vælg optimismen aktivt — ret ryggen, smil, og angrib det næste slag som en helt ny start. Attitude slår alt."},
+ {n:"Bobby Jones",
+  godt:"Bobby Jones: spillet er mellem ørerne. Behold roen — den vandt lige et hul.",
+  okay:"Jones: mestring er selvbeherskelse. Bliv rolig, bliv i planen.",
+  daarligt:"Bobby Jones: golf spilles på en bane på fjorten centimeter — den mellem dine ører. Et dårligt hul vandt lige det spil. Tag det tilbage: træk vejret, behersk dig selv, og spil det næste slag som den rolige spiller, du er."},
+ {n:"Ben Hogan",
+  godt:"Hogan: ét godt slag betyder intet uden det næste. Bliv disciplineret.",
+  okay:"Hogan: gentag din rutine præcist. Kedelig er stærkt.",
+  daarligt:"Ben Hogan: det vigtigste slag i golf er altid det næste — det forrige er væk. Gå til næste tee med samme kølige disciplin, samme rutine, og ram dit target. Følelser er valgfrie; rutinen er ikke."}
+];
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 const USA=[
  {n:"Fredrik Harries",h:11.1},{n:"Michael Kähler",h:5.2},{n:"Erik Andersen",h:29.9},{n:"Jesper Duus",h:18.1},
@@ -678,11 +706,17 @@ function openPosthole(i){
   document.getElementById('posthole').classList.add('on');
   document.querySelectorAll('#phInner .ph-opt').forEach(b=>b.onclick=()=>pickMood(i,b.dataset.m));
 }
+let lastLegend=-1;
 function pickMood(i,m){
   moods[i]=m; saveRound();
-  const d=MOOD[m], last=(i===17);
+  let idx; do{idx=Math.floor(Math.random()*LEGENDS.length);}while(LEGENDS.length>1 && idx===lastLegend);
+  lastLegend=idx; const L=LEGENDS[idx], last=(i===17);
   document.getElementById('phInner').innerHTML=`
-    <div class="ph-coach ${m}"><div class="ph-ct">${d.t}</div><div class="ph-cc">${d.c}</div></div>
+    <div class="ph-coach ${m}">
+      <div class="ph-mood ${m}">${MLABEL[m]} · Hul ${HOLES[i].n}</div>
+      <div class="ph-by">Sådan ville <b>${L.n}</b> gøre det</div>
+      <div class="ph-cc">${L[m]}</div>
+    </div>
     <button class="ph-go" id="phGo">${last?'Se runden':'Videre til hul '+HOLES[i+1].n} →</button>`;
   document.getElementById('phGo').onclick=()=>{
     document.getElementById('posthole').classList.remove('on');
