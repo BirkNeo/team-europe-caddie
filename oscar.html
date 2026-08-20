@@ -138,6 +138,16 @@
   .d-eyebrow{color:var(--gold);font-size:12px}
   .d-club{font-family:"Archivo";font-weight:800;font-size:clamp(40px,13vw,56px);line-height:.95;
     letter-spacing:-.01em;margin:2px 0 3px;text-transform:uppercase}
+  .teeopts{display:flex;flex-direction:column;margin:5px 0 2px}
+  .teeopt{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:13px 15px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:13px}
+  .teeopt.primary{background:rgba(230,200,116,.10);border-color:var(--goldline)}
+  .teeopt b{font-family:"Archivo";font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:-.01em;line-height:1.05}
+  .teeopt.primary b{color:var(--gold)}
+  .teeopt span{font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--mut);white-space:nowrap}
+  .oror{text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.24em;font-size:10px;color:var(--mut);padding:8px 0}
+  .d-why{font-size:13.5px;color:#e9dcbf;line-height:1.5;margin:11px 0 3px}
+  .d-why .dm{color:var(--gold);font-size:9px;vertical-align:middle}
   .d-row{display:flex;gap:12px;margin-top:15px}
   .d-cell{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
   .d-cell .k{color:var(--mut);font-size:10.5px}
@@ -224,6 +234,30 @@
   .card-tbl tr.tot9 td{background:rgba(255,255,255,.03);color:var(--gold)}
   .missnote{background:rgba(63,131,189,.1);border:1px solid rgba(63,131,189,.26);border-radius:11px;
     padding:10px 13px;font-size:11.5px;color:#a9c4de;margin:18px 0 8px;line-height:1.6}
+  /* ---------- POST-HOLE COACHING ---------- */
+  .posthole{position:fixed;inset:0;z-index:55;display:none;flex-direction:column;justify-content:center;
+    background:radial-gradient(120% 80% at 50% 0%,#16213f,#0a1020 60%);
+    padding:24px max(20px,env(safe-area-inset-left)) calc(26px + env(safe-area-inset-bottom))}
+  .posthole.on{display:flex}
+  .ph-inner{max-width:560px;margin:0 auto;width:100%}
+  .ph-hno{color:var(--under);font-size:12px;text-align:center;margin-bottom:12px}
+  .ph-q{font-family:"Oswald";font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(24px,7vw,30px);text-align:center;margin-bottom:26px}
+  .ph-opts{display:flex;flex-direction:column;gap:12px}
+  .ph-opt{font-family:"Oswald";text-transform:uppercase;letter-spacing:.12em;font-weight:600;font-size:19px;
+    padding:21px;border-radius:15px;border:1px solid var(--line);background:var(--surf);color:var(--ivory);transition:transform .1s}
+  .ph-opt:active{transform:scale(.98)}
+  .ph-opt.godt{border-color:rgba(99,205,144,.45)} .ph-opt.okay{border-color:rgba(232,180,95,.45)} .ph-opt.daarligt{border-color:rgba(235,115,110,.5)}
+  .ph-coach{border-radius:17px;padding:21px;border:1px solid var(--line);background:var(--surf);margin-bottom:18px}
+  .ph-coach.godt{border-color:rgba(99,205,144,.45)} .ph-coach.okay{border-color:rgba(232,180,95,.45)} .ph-coach.daarligt{border-color:rgba(235,115,110,.5)}
+  .ph-ct{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-weight:700;font-size:20px;margin-bottom:11px}
+  .ph-coach.godt .ph-ct{color:var(--under)} .ph-coach.okay .ph-ct{color:#e8b45f} .ph-coach.daarligt .ph-ct{color:#f0908c}
+  .ph-cc{font-size:15px;color:var(--dim);line-height:1.65}
+  .ph-cc b{color:var(--ivory)}
+  .ph-go{display:block;width:100%;text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.16em;
+    font-weight:700;font-size:16px;color:var(--ink0);background:linear-gradient(180deg,var(--gold),var(--gold2));
+    border-radius:15px;padding:18px;box-shadow:0 12px 26px -12px rgba(230,200,116,.5);transition:transform .12s}
+  .ph-go:active{transform:scale(.98)}
+
   /* ---------- CAPTAIN ---------- */
   #captain{padding-top:max(46px,calc(env(safe-area-inset-top) + 26px));padding-bottom:40px}
   .capboard{display:flex;align-items:stretch;gap:8px;margin:14px 0 18px}
@@ -287,6 +321,8 @@
 
 <div class="lightbox" id="lightbox" onclick="closeMap()"><button class="x" aria-label="Luk">✕</button><img id="lbimg" alt="Hul-kort"></div>
 
+<div class="posthole" id="posthole"><div class="ph-inner" id="phInner"></div></div>
+
 <script>
 const PLAYERS=[
  {id:"oscar",name:"Oscar Mogensen",first:"Oscar",hcp:4.9,tier:"a"},
@@ -308,6 +344,11 @@ const KEND={
  a:"Du kan angribe — men vælg dine øjeblikke. Banen straffer grådighed.",
  t:"Position slår længde. Bogey på de svære er point i banken.",
  g:"Du får slag på de svære huller — spil dem sikkert for net par, så scorer du."
+};
+const MOOD={
+ godt:{t:"Godt spillet 👊",c:"Nyd det ét sekund — og slip det så. Næste hul er et nyt hul, og din næste beslutning er den eneste der tæller. Bliv i din proces, ikke i scoren — så holder momentum."},
+ okay:{t:"Helt fint 👍",c:"Golf er ikke 18 perfekte huller — det er at holde skaden lav. Du er stadig i din plan. På næste tee: én klar beslutning, ram dit target, videre."},
+ daarligt:{t:"Ét hul. Ét datapunkt.",c:"Det var ikke en tendens, ikke din dag, ikke dig.<br><br><b>1.</b> Tre langsomme vejrtrækninger — sænk pulsen, ikke tanken.<br><b>2.</b> Sig det højt: “det hul er ovre.”<br><b>3.</b> Næste tee: det mindst ambitiøse, sikreste slag — vind roen tilbage med én god beslutning, ikke en helteredning.<br><br>Skaden kommer næsten altid på <b>det næste hul</b>. Din værdi ligger i det næste slag — aldrig i det sidste."}
 };
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 const USA=[
@@ -391,18 +432,39 @@ const HOLES=[
        g:{k:"Sidste hul!",n:"Ikke et vildt slag mod vandet.",d:"Tre rolige slag venstre for vandet, pitch på. Net birdie-finale."}}},
 ];
 
+const TEEWHY={
+ 1:"Kort åbningshul — du skal i spil, ikke langt. Vælg det du rammer lige; OB venstre straffer al overflødig kraft.",
+ 2:"Smalt med skov venstre. Meter er ligegyldige hvis du står i træerne — vælg den kølle du sender lige.",
+ 3:"Kort par-3: vælg køllen der lander blødt på midten. Jag aldrig et flag bag en bunker.",
+ 4:"Par-5 i tre slag — du skal ikke nå den nu. Vælg det du holder i spil; der er god tid til green.",
+ 5:"Dam midt i fairway: det vigtigste er at STOPPE kort af vandet. Vælg køllen der IKKE når dammen.",
+ 6:"Vand på begge sider af green — tag hellere for meget kølle end for lidt. Center vinder hullet.",
+ 7:"Kort par-4: du behøver ikke længde. Vælg det sikre og få et rent indspil væk fra søen venstre.",
+ 8:"Bæk krydser fairwayen. Vælg køllen der stopper KORT af bækken — placering slår længde her.",
+ 9:"Kun 300 m: vælg det du rammer lige og læg en wedge ind. Damme venstre gør præcision vigtigst.",
+ 10:"Par-5: læg tee-slaget hvor du er sikker. Du har to slag mere forbi vandet — ingen grund til at presse.",
+ 11:"Længste par-3: vælg den kølle du faktisk rammer rent på 175 — ikke den du håber på. Center, par er godt.",
+ 12:"Banens hårdeste, damme på begge sider. Vælg det der lander SIKKERT mellem vandet — kontrol slår alt.",
+ 13:"Damme på begge sider: vælg køllen der stopper foran vandet. Hellere 150 ind fra fairway end 130 fra søen.",
+ 14:"Sø hele venstre — vælg køllen der bærer sikkert til højre/center. Spil aldrig for lidt.",
+ 15:"Smal tree-chute: rammer du ikke 5-woodet lige, så tag jernet. Fairwayen er alt, meter er intet.",
+ 16:"Venligt og kort: vælg det du rammer lige, hold højre for dammen, og angrib green med en wedge.",
+ 17:"Sø venstre hele vejen: vælg det der holder dig i HØJRE side. Placeringen væk fra vandet redder hullet.",
+ 18:"Afsluttende par-5: læg tee-slaget sikkert. Du har slagene til at nå frem venstre om vandet."
+};
+
 /* ---------- state ---------- */
 const LS_P="te_player", LS_R=id=>"te_round_"+id;
 const LS={get:k=>{try{return localStorage.getItem(k);}catch(e){return null;}},
          set:(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}},
          del:k=>{try{localStorage.removeItem(k);}catch(e){}}};
 const FORCED_PLAYER="oscar"; /* personlige links sætter denne til en spiller-id */
-let player=null, scores=[], saved=[], cur=0;
+let player=null, scores=[], saved=[], moods=[], cur=0;
 
 function strokesOn(hcp,idx){const h=Math.round(hcp);let s=0;if(h>=idx)s++;if(h>=idx+18)s++;return s;}
-function loadRound(id){try{const r=JSON.parse(LS.get(LS_R(id)));if(r&&r.scores){scores=r.scores;saved=r.saved;return;}}catch(e){}
-  scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);}
-function saveRound(){if(player)LS.set(LS_R(player.id),JSON.stringify({scores,saved}));}
+function loadRound(id){try{const r=JSON.parse(LS.get(LS_R(id)));if(r&&r.scores){scores=r.scores;saved=r.saved;moods=r.moods||HOLES.map(()=>null);return;}}catch(e){}
+  scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);moods=HOLES.map(()=>null);}
+function saveRound(){if(player)LS.set(LS_R(player.id),JSON.stringify({scores,saved,moods}));}
 function points(i){const h=HOLES[i];const net=scores[i]-strokesOn(player.hcp,h.idx);const p=2+h.par-net;return p<0?0:p;}
 function playedIdx(){return saved.map((s,i)=>s?i:-1).filter(i=>i>=0);}
 
@@ -503,8 +565,13 @@ function renderHole(){
     <div class="maphint"><span>Hul-kort</span><span>Tryk for fuldt skærm ⤢</span></div>
     <div class="hazbar">⚑ ${h.haz}</div>
     <div class="decide">
-      <div class="d-eyebrow lab">Tee</div>
-      <div class="d-club">${h.tee.club}</div>
+      <div class="d-eyebrow lab">Tee — vælg din</div>
+      <div class="teeopts">
+        <div class="teeopt primary"><b>${h.tee.club}</b><span>${h.par===3?'rammer center':'mest længde'}</span></div>
+        <div class="oror">eller</div>
+        <div class="teeopt"><b>${h.par===3?'Én kølle mere':'Dit sikreste lange jern'}</b><span>${h.par===3?'sikker margin':'mest sikker'}</span></div>
+      </div>
+      <div class="d-why"><span class="dm">◆</span> ${TEEWHY[h.n]}</div>
       <div class="d-row">
         <div class="d-cell"><div class="k lab">Target</div><div class="v">${h.tee.target}</div></div>
         <div class="d-cell miss"><div class="k lab">Safe miss</div><div class="v">${h.tee.miss}</div></div>
@@ -549,7 +616,7 @@ function renderHole(){
   q('saveBtn').onclick=()=>{
     saved[cur]=true;saveRound();const b=q('saveBtn');b.classList.add('done');b.innerHTML='GEMT ✓';
     renderLive();
-    setTimeout(()=>{ if(cur===17){renderSummary();} else {cur++;openHole();} },260);
+    setTimeout(()=>openPosthole(cur),240);
   };
 }
 document.getElementById('navprev').onclick=()=>{if(cur>0){cur--;openHole();}};
@@ -596,6 +663,32 @@ function renderSummary(){
 /* ---------- hole-map lightbox ---------- */
 function openMap(n){var i=document.getElementById('lbimg');i.src='holes/'+n+'.jpg';document.getElementById('lightbox').classList.add('on');}
 function closeMap(){document.getElementById('lightbox').classList.remove('on');}
+
+/* ---------- efter hvert hul: hvordan gik det + coaching ---------- */
+function openPosthole(i){
+  const h=HOLES[i];
+  document.getElementById('phInner').innerHTML=`
+    <div class="ph-hno lab">Hul ${h.n} gemt ✓</div>
+    <div class="ph-q">Hvordan gik hullet?</div>
+    <div class="ph-opts">
+      <button class="ph-opt godt" data-m="godt">🟢 Godt</button>
+      <button class="ph-opt okay" data-m="okay">🟡 Okay</button>
+      <button class="ph-opt daarligt" data-m="daarligt">🔴 Dårligt</button>
+    </div>`;
+  document.getElementById('posthole').classList.add('on');
+  document.querySelectorAll('#phInner .ph-opt').forEach(b=>b.onclick=()=>pickMood(i,b.dataset.m));
+}
+function pickMood(i,m){
+  moods[i]=m; saveRound();
+  const d=MOOD[m], last=(i===17);
+  document.getElementById('phInner').innerHTML=`
+    <div class="ph-coach ${m}"><div class="ph-ct">${d.t}</div><div class="ph-cc">${d.c}</div></div>
+    <button class="ph-go" id="phGo">${last?'Se runden':'Videre til hul '+HOLES[i+1].n} →</button>`;
+  document.getElementById('phGo').onclick=()=>{
+    document.getElementById('posthole').classList.remove('on');
+    if(last){renderSummary();} else {cur=i+1;openHole();}
+  };
+}
 
 /* ---------- kaptajnens holdtavle ---------- */
 let capData={eu:{},us:{}};
