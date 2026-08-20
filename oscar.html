@@ -224,6 +224,29 @@
   .card-tbl tr.tot9 td{background:rgba(255,255,255,.03);color:var(--gold)}
   .missnote{background:rgba(63,131,189,.1);border:1px solid rgba(63,131,189,.26);border-radius:11px;
     padding:10px 13px;font-size:11.5px;color:#a9c4de;margin:18px 0 8px;line-height:1.6}
+  /* ---------- CAPTAIN ---------- */
+  #captain{padding-top:max(46px,calc(env(safe-area-inset-top) + 26px));padding-bottom:40px}
+  .capboard{display:flex;align-items:stretch;gap:8px;margin:14px 0 18px}
+  .capside{flex:1;background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--line);
+    border-radius:16px;padding:14px 8px;text-align:center;transition:border-color .2s}
+  .capside.win{border-color:var(--goldline);box-shadow:0 0 22px -8px rgba(230,200,116,.4)}
+  .capside .flag{font-size:22px}
+  .capside .nm{font-family:"Oswald";text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--mut);margin-top:2px}
+  .capside .pts{font-family:"Archivo";font-weight:800;font-size:46px;line-height:1;margin-top:3px}
+  .capside.win .pts{color:var(--gold)}
+  .capvs{align-self:center;font-family:"Oswald";font-weight:700;color:var(--mut);font-size:13px;letter-spacing:.1em}
+  .capsec{font-family:"Oswald";text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--gold);margin:18px 0 6px;font-weight:600}
+  .caprow{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .caprow .ci{flex:0 0 34px;height:34px;border-radius:9px;display:grid;place-items:center;font-family:"Oswald";font-weight:700;font-size:14px;color:var(--ink0)}
+  .caprow .ci.eu{background:linear-gradient(150deg,var(--gold),var(--gold2))}
+  .caprow .ci.us{background:linear-gradient(150deg,#e8726e,#b2413d);color:#fff}
+  .caprow .cnm{flex:1;font-size:14.5px;font-weight:600;line-height:1.2}
+  .caprow .cnm small{display:block;font-family:"Oswald";font-size:10px;letter-spacing:.08em;color:var(--mut);text-transform:uppercase;font-weight:500;margin-top:2px}
+  .caprow input{width:66px;height:46px;border-radius:12px;background:var(--raise);border:1px solid var(--line);
+    color:var(--ivory);font-family:"Archivo";font-weight:800;font-size:20px;text-align:center;font-variant-numeric:tabular-nums}
+  .caprow input:focus{outline:none;border-color:var(--gold)}
+  .capnote{font-size:11.5px;color:var(--mut);margin:18px 0 0;line-height:1.6}
+
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -259,6 +282,9 @@
 <!-- ===== SUMMARY ===== -->
 <section class="screen pad" id="summary"></section>
 
+<!-- ===== CAPTAIN ===== -->
+<section class="screen pad" id="captain"></section>
+
 <div class="lightbox" id="lightbox" onclick="closeMap()"><button class="x" aria-label="Luk">✕</button><img id="lbimg" alt="Hul-kort"></div>
 
 <script>
@@ -284,6 +310,10 @@ const KEND={
  g:"Du får slag på de svære huller — spil dem sikkert for net par, så scorer du."
 };
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
+const USA=[
+ {n:"Fredrik Harries",h:11.1},{n:"Michael Kähler",h:5.2},{n:"Erik Andersen",h:29.9},{n:"Jesper Duus",h:18.1},
+ {n:"Marc Riesel",h:14.2},{n:"Chris",h:13.8},{n:"Simon Cahill",h:21},{n:"Michael Messing Thorsen",h:22.2}
+];
 
 // tee.club / target / miss / approach — fra eksisterende Skyrup-caddiedata (aflæst 18 hulkort). Intet opdigtet.
 const HOLES=[
@@ -429,9 +459,11 @@ function renderHome(){
       :inProg?`<button class="big-btn" id="cont">FORTSÆT · HUL ${playedIdx().length+1}</button>
                <button class="ghost" id="restart">START FORFRA</button>`
       :`<button class="big-btn" id="startRound">START ROUND</button>`}
+      ${player.id==='lasse'?'<button class="ghost" id="capBtn" style="margin-top:11px">⚑ Kaptajnens holdtavle</button>':''}
       ${FORCED_PLAYER?'':'<button class="switch" id="switchP">Skift spiller</button>'}
     </div>`;
   const q=id=>document.getElementById(id);
+  if(q('capBtn'))q('capBtn').onclick=()=>{renderCaptain();show('captain');};
   if(q('startRound'))q('startRound').onclick=()=>{cur=0;openHole();};
   if(q('cont'))q('cont').onclick=()=>{cur=Math.min(playedIdx().length,17);openHole();};
   if(q('restart'))q('restart').onclick=()=>{if(confirm('Nulstil scoren og start forfra?')){scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);saveRound();cur=0;openHole();}};
@@ -564,6 +596,42 @@ function renderSummary(){
 /* ---------- hole-map lightbox ---------- */
 function openMap(n){var i=document.getElementById('lbimg');i.src='holes/'+n+'.jpg';document.getElementById('lightbox').classList.add('on');}
 function closeMap(){document.getElementById('lightbox').classList.remove('on');}
+
+/* ---------- kaptajnens holdtavle ---------- */
+let capData={eu:{},us:{}};
+function loadCap(){try{const r=JSON.parse(LS.get("te_captain"));if(r&&r.eu)capData=r;}catch(e){}}
+function saveCap(){LS.set("te_captain",JSON.stringify(capData));}
+function roundPoints(pl){try{const r=JSON.parse(LS.get(LS_R(pl.id)));
+  if(!r||!r.saved||r.saved.filter(Boolean).length<18)return null;
+  let t=0;for(let i=0;i<18;i++){const net=r.scores[i]-strokesOn(pl.hcp,HOLES[i].idx);t+=Math.max(0,2+HOLES[i].par-net);}return t;
+}catch(e){return null;}}
+function capTotals(){const s=o=>Object.values(o).reduce((a,b)=>a+(+b||0),0);return {eu:s(capData.eu),us:s(capData.us)};}
+function drawCapBoard(){const b=document.getElementById('capboard');if(!b)return;const {eu,us}=capTotals();
+  b.innerHTML=`<div class="capside ${eu>us?'win':''}"><div class="flag">🇪🇺</div><div class="nm">Europa</div><div class="pts num">${eu}</div></div>
+    <div class="capvs">VS</div>
+    <div class="capside ${us>eu?'win':''}"><div class="flag">🇺🇸</div><div class="nm">USA</div><div class="pts num">${us}</div></div>`;}
+function renderCaptain(){
+  loadCap();
+  PLAYERS.forEach(p=>{if(capData.eu[p.id]==null){const rp=roundPoints(p);if(rp!=null)capData.eu[p.id]=rp;}});
+  const hc=v=>String(v).replace('.',',');
+  const euRows=PLAYERS.map(p=>`<div class="caprow"><div class="ci eu">${p.first[0]}</div><div class="cnm">${p.name}<small>HCP ${hc(p.hcp)}</small></div><input type="number" inputmode="numeric" min="0" data-team="eu" data-id="${p.id}" value="${capData.eu[p.id]??''}" placeholder="–"></div>`).join('');
+  const usRows=USA.map((p,i)=>`<div class="caprow"><div class="ci us">${p.n[0]}</div><div class="cnm">${p.n}<small>HCP ${hc(p.h)}</small></div><input type="number" inputmode="numeric" min="0" data-team="us" data-id="${i}" value="${capData.us[i]??''}" placeholder="–"></div>`).join('');
+  document.getElementById('captain').innerHTML=`
+    <div class="rc">Kaptajnens Holdtavle</div>
+    <div class="rc3" style="margin-bottom:2px">Tast hver spillers stableford-point ind — totalen regner sig selv</div>
+    <div class="capboard" id="capboard"></div>
+    <div class="capsec">🇪🇺 Team Europa</div>${euRows}
+    <div class="capsec">🇺🇸 Team USA</div>${usRows}
+    <div class="capnote">ⓘ Kun på din telefon (kaptajnens regnskab). Dine egne Europa-point fyldes ud automatisk, hvis din runde er gemt — ret frit. Point tælles sammen, højeste total vinder.</div>
+    <div style="margin-top:16px"><button class="ghost" id="capBack">← Tilbage</button></div>`;
+  document.querySelectorAll('#captain input').forEach(inp=>{
+    inp.oninput=()=>{const t=inp.dataset.team,id=inp.dataset.id,v=inp.value.trim();
+      if(v==='')delete capData[t][id];else capData[t][id]=Math.max(0,parseInt(v,10)||0);
+      saveCap();drawCapBoard();};
+  });
+  document.getElementById('capBack').onclick=()=>{renderHome();show('home');};
+  drawCapBoard();
+}
 
 /* ---------- boot / routing ---------- */
 function boot(){
