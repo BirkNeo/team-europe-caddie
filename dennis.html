@@ -253,6 +253,18 @@
   .ph-coach.godt .ph-mood{color:var(--under)} .ph-coach.okay .ph-mood{color:#e8b45f} .ph-coach.daarligt .ph-mood{color:#f0908c}
   .ph-by{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:17px;color:var(--ivory);margin-bottom:11px}
   .ph-by b{color:var(--gold)}
+  .ph-legend{display:flex;align-items:center;gap:13px;margin-bottom:15px}
+  .ph-crest{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center;
+    font-family:"Oswald";font-weight:700;font-size:20px;color:var(--ink0);
+    background:linear-gradient(150deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px rgba(230,200,116,.18)}
+  .ph-lmeta{flex:1;min-width:0}
+  .ph-lname{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:700;font-size:18px;line-height:1.1}
+  .ph-lwon{font-size:12px;color:var(--gold);margin-top:3px}
+  .ph-mtag{flex:0 0 auto;font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:600;
+    padding:5px 10px;border-radius:20px;border:1px solid var(--line)}
+  .ph-coach.godt .ph-mtag{color:var(--under);border-color:rgba(99,205,144,.4)}
+  .ph-coach.okay .ph-mtag{color:#e8b45f;border-color:rgba(232,180,95,.4)}
+  .ph-coach.daarligt .ph-mtag{color:#f0908c;border-color:rgba(235,115,110,.45)}
   .ph-cc{font-size:15px;color:var(--dim);line-height:1.65}
   .ph-cc b{color:var(--ivory)}
   .ph-go{display:block;width:100%;text-align:center;font-family:"Oswald";text-transform:uppercase;letter-spacing:.16em;
@@ -378,6 +390,15 @@ const LEGENDS=[
   okay:"Hogan: gentag din rutine præcist. Kedelig er stærkt.",
   daarligt:"Ben Hogan: det vigtigste slag i golf er altid det næste — det forrige er væk. Gå til næste tee med samme kølige disciplin, samme rutine, og ram dit target. Følelser er valgfrie; rutinen er ikke."}
 ];
+const WON={
+ "Tiger Woods":"15 majors",
+ "Rory McIlroy":"5 majors · karriere-Grand Slam",
+ "Jack Nicklaus":"18 majors — flest i historien",
+ "Seve Ballesteros":"5 majors · Ryder Cup-ikon",
+ "Gary Player":"9 majors · karriere-Grand Slam",
+ "Bobby Jones":"Grand Slam 1930 · grundlagde Masters",
+ "Ben Hogan":"9 majors · comeback-legende"
+};
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 const USA=[
  {n:"Fredrik Harries",h:11.1},{n:"Michael Kähler",h:5.2},{n:"Erik Andersen",h:29.9},{n:"Jesper Duus",h:18.1},
@@ -711,10 +732,14 @@ function pickMood(i,m){
   moods[i]=m; saveRound();
   let idx; do{idx=Math.floor(Math.random()*LEGENDS.length);}while(LEGENDS.length>1 && idx===lastLegend);
   lastLegend=idx; const L=LEGENDS[idx], last=(i===17);
+  const ini=L.n.split(' ').map(w=>w[0]).join('').slice(0,2);
   document.getElementById('phInner').innerHTML=`
     <div class="ph-coach ${m}">
-      <div class="ph-mood ${m}">${MLABEL[m]} · Hul ${HOLES[i].n}</div>
-      <div class="ph-by">Sådan ville <b>${L.n}</b> gøre det</div>
+      <div class="ph-legend">
+        <div class="ph-crest">${ini}</div>
+        <div class="ph-lmeta"><div class="ph-lname">${L.n}</div><div class="ph-lwon">🏆 ${WON[L.n]||''}</div></div>
+        <div class="ph-mtag ${m}">${MLABEL[m]}</div>
+      </div>
       <div class="ph-cc">${L[m]}</div>
     </div>
     <button class="ph-go" id="phGo">${last?'Se runden':'Videre til hul '+HOLES[i+1].n} →</button>`;
