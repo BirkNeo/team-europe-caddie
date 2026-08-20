@@ -68,6 +68,8 @@
   .role.a{color:#f2c98e;border-color:rgba(230,180,120,.4)} .role.t{color:#8fb8f2;border-color:rgba(90,155,240,.38)}
   .role.g{color:#aeb9d8;border-color:rgba(150,165,210,.4)}
   .rdesc{color:var(--dim);font-size:14.5px;margin:16px 0 6px;max-width:46ch}
+  .chcp{margin-top:11px;font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--gold)}
+  .chcp b{font-weight:700}
   .manifesto{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);
     border-radius:16px;padding:17px 18px;margin:20px 0 4px;box-shadow:var(--shadow)}
   .manifesto h3{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--gold);margin-bottom:10px}
@@ -413,6 +415,9 @@ const WON={
  "Ben Hogan":"9 majors · comeback-legende"
 };
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
+/* Skyrup gul tee — RET disse når scorekortets/Golfbox' officielle tal er bekræftet.
+   allowance = handicap-tildeling (1.00 = fuldt, 0.95 = 95% individuel stableford). */
+const RATING={cr:67.4, slope:123, allowance:1.00};
 const USA=[
  {n:"Fredrik Harries",h:11.1},{n:"Michael Kähler",h:5.2},{n:"Erik Andersen",h:29.9},{n:"Jesper Duus",h:18.1},
  {n:"Marc Riesel",h:14.2},{n:"Chris",h:13.8},{n:"Simon Cahill",h:21},{n:"Michael Messing Thorsen",h:22.2}
@@ -532,7 +537,8 @@ function makeLegSeq(){
   return deck.slice();
 }
 
-function strokesOn(hcp,idx){const h=Math.round(hcp);let s=0;if(h>=idx)s++;if(h>=idx+18)s++;return s;}
+function playHcp(index){const ch=index*RATING.slope/113+(RATING.cr-COURSE.par);return Math.round(ch*RATING.allowance);}
+function strokesOn(index,idx){const h=playHcp(index);let s=0;if(h>=idx)s++;if(h>=idx+18)s++;return s;}
 function loadRound(id){try{const r=JSON.parse(LS.get(LS_R(id)));if(r&&r.scores){scores=r.scores;saved=r.saved;moods=r.moods||HOLES.map(()=>null);legseq=(r.legseq&&r.legseq.length===18)?r.legseq:makeLegSeq();return;}}catch(e){}
   scores=HOLES.map(h=>h.par);saved=HOLES.map(()=>false);moods=HOLES.map(()=>null);legseq=makeLegSeq();}
 function saveRound(){if(player)LS.set(LS_R(player.id),JSON.stringify({scores,saved,moods,legseq}));}
@@ -575,6 +581,7 @@ function renderHome(){
     <div class="hi">God tur</div>
     <div class="hname">${player.first}</div>
     <span class="role ${r.c}">${r.t} · HCP ${String(player.hcp).replace('.',',')}</span>
+    <div class="chcp">Banehcp · Skyrup (gul) · <b>${playHcp(player.hcp)} slag</b></div>
     <p class="rdesc">${RDESC[player.tier]}</p>
     ${live}
     <div class="manifesto">
@@ -725,7 +732,7 @@ function renderSummary(){
     </div>
     ${nineTable(front,'Forsiden · 1–9',F)}
     ${nineTable(back,'Bagsiden · 10–18',B)}
-    <div class="missnote">ⓘ Stableford er beregnet ud fra spillehandicap ≈ dit handicap (Skyrups slope/CR findes ikke i datagrundlaget, så point er tilnærmet). Farer og linjer er aflæst fra klubbens 18 hulkort — intet er opdigtet.</div>
+    <div class="missnote">ⓘ Stableford er beregnet på dit <b>banehandicap</b> (Skyrup gul: CR 67,4 · slope 123 · par 71 → banehcp = hcp × slope/113 + (CR − par)). Bekræft tallene mod scorekortet/Golfbox — sig til hvis de skal justeres. Farer og linjer er aflæst fra klubbens 18 hulkort.</div>
     <div style="margin-top:12px"><button class="ghost" id="backHome">← Tilbage til ${player.first}</button></div>`;
   document.getElementById('backHome').onclick=()=>{renderHome();show('home');};
   show('summary');
