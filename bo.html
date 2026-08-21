@@ -256,9 +256,9 @@
   .ph-by{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:17px;color:var(--ivory);margin-bottom:11px}
   .ph-by b{color:var(--gold)}
   .ph-legend{display:flex;align-items:center;gap:13px;margin-bottom:15px}
-  .ph-crest{flex:0 0 58px;height:58px;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
-    font-family:"Oswald";font-weight:700;font-size:21px;color:var(--ink0);
-    background:linear-gradient(150deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px rgba(230,200,116,.22)}
+  .ph-crest{flex:0 0 84px;height:84px;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+    font-family:"Oswald";font-weight:700;font-size:28px;color:var(--ink0);
+    background:linear-gradient(150deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px rgba(230,200,116,.25)}
   .ph-crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:2}
   .ph-crest .cini{position:relative;z-index:1}
   .ph-lmeta{flex:1;min-width:0}
@@ -314,7 +314,7 @@
   <div class="word2">Course Management</div>
   <div class="hair"></div>
   <div class="pgrid" id="pgrid"></div>
-  <div class="startfoot">Vælg dig selv — dit valg huskes på telefonen.<br>Skyrup Golf &amp; Hotell · Par 71 · gul tee</div>
+  <div class="startfoot">Vælg dig selv. Dit valg huskes på telefonen.<br>Skyrup Golf &amp; Hotell · Par 71 · gul tee</div>
 </section>
 
 <!-- ===== HOME ===== -->
@@ -340,7 +340,7 @@
 <!-- ===== CAPTAIN ===== -->
 <section class="screen pad" id="captain"></section>
 
-<div class="lightbox" id="lightbox" onclick="closeMap()"><button class="x" aria-label="Luk">✕</button><img id="lbimg" alt="Hul-kort"></div>
+<div class="lightbox" id="lightbox" onclick="closeMap()"><button class="x" aria-label="Luk">✕</button><img id="lbimg" alt="Hulkort"></div>
 
 <div class="posthole" id="posthole"><div class="ph-inner" id="phInner"></div></div>
 
@@ -357,68 +357,68 @@ const PLAYERS=[
 ];
 const ROLE={a:{t:"Angriber",c:"a"},t:{t:"Taktiker",c:"t"},g:{t:"Grinder",c:"g"}};
 const RDESC={
- a:"Du har spillet til at score — men Skyrup straffer aggression. Vælg dine øjeblikke, respektér vandet.",
+ a:"Du har spillet til at score. Men Skyrup straffer aggression. Vælg dine øjeblikke, respektér vandet.",
  t:"Positionsgolf er dit våben. Driveren bliver i baggen; bogey på de svære er planen, ikke nederlaget.",
  g:"Din opgave er point, ikke pars. Undgå de store tal, tag dine slag, og du samler stableford ind."
 };
 const KEND={
- a:"Du kan angribe — men vælg dine øjeblikke. Banen straffer grådighed.",
+ a:"Du kan angribe. Men vælg dine øjeblikke. Banen straffer grådighed.",
  t:"Position slår længde. Bogey på de svære er point i banken.",
- g:"Du får slag på de svære huller — spil dem sikkert for net par, så scorer du."
+ g:"Du får slag på de svære huller. Spil dem sikkert for net par, så scorer du."
 };
 const MLABEL={godt:"🟢 Godt",okay:"🟡 Okay",daarligt:"🔴 Dårligt"};
 const LEGENDS=[
  {n:"Tiger Woods",
-  godt:"Godt spillet — men Tiger fejrede aldrig længe. Han tillod sig præcis ét sekund, og så var blikket på næste beslutning. Følelsen af et godt hul kan gøre dig skødesløs; derfor bliver de bedste i deres rutine, uanset hvad tavlen siger. Nyd det, slip det, og gå ind i næste hul lige så fokuseret.",
-  okay:"Tiger vandt sjældent ved at være spektakulær — han vandt ved at fjerne de store fejl, hul efter hul, og lade modstanderen begå dem. Et okay hul er et fint hul. Du er stadig i din plan. Gentag din rutine på næste tee, ram dit target, og lad de små gode huller lægge sig oven på hinanden.",
-  daarligt:"Earl Woods lærte Tiger én ting, der gjorde ham urørlig: vær lige så vred og skuffet, som du vil — men <b>kun til du har gået ti skridt fra bolden.</b> Så er følelsen udløbet og følger ikke med til næste slag. Gør det nu: gå de ti skridt, mærk det fuldt ud, og slip det så helt. Ét dårligt hul er ét hul — ikke en tendens, ikke din dag. Tiger lavede dobbeltbogeys og vandt majors alligevel, fordi han aldrig lod ét hul stjæle det næste. Din værdi ligger i det næste slag."},
+  godt:"Godt spillet. Men Tiger fejrede aldrig længe. Han tillod sig præcis ét sekund, og så var blikket på næste beslutning. Følelsen af et godt hul kan gøre dig skødesløs; derfor bliver de bedste i deres rutine, uanset hvad tavlen siger. Nyd det, slip det, og gå ind i næste hul lige så fokuseret.",
+  okay:"Tiger vandt sjældent ved at være spektakulær. Han vandt ved at fjerne de store fejl, hul efter hul, og lade modstanderen begå dem. Et okay hul er et fint hul. Du er stadig i din plan. Gentag din rutine på næste tee, ram dit target, og lad de små gode huller lægge sig oven på hinanden.",
+  daarligt:"Earl Woods lærte Tiger én ting, der gjorde ham urørlig: vær lige så vred og skuffet, som du vil, men <b>kun til du har gået ti skridt fra bolden.</b> Så er følelsen udløbet og følger ikke med til næste slag. Gør det nu: gå de ti skridt, mærk det fuldt ud, og slip det så helt. Ét dårligt hul er ét hul. Ikke en tendens, ikke din dag. Tiger lavede dobbeltbogeys og vandt majors alligevel, fordi han aldrig lod ét hul stjæle det næste. Din værdi ligger i det næste slag."},
  {n:"Rory McIlroy",
-  godt:"Flot — spil frit, og lad det gode hul bekræfte, at din plan virker. Men bliv tålmodig; en runde vindes ikke på ét hul. Bliv i din boble, hold rytmen, og tag den næste beslutning lige så roligt. Momentum er bare tålmodighed, der får lov at fortsætte.",
-  okay:"Rory minder dig om, at golf er en lang dag, og tålmodighed er dit skarpeste våben. Du behøver ikke tvinge noget — bliv i processen, spil dine chancer, når de kommer, og accepter de huller, der bare skal overstås. Pointene samler sig, når du ikke jagter dem.",
-  daarligt:"Rory siger det, han selv måtte lære på den hårde måde: du skal være din egen bedste ven derude, ikke din værste kritiker. Skæld ikke dig selv ud — ét hul definerer hverken din runde eller dig. Træk vejret dybt, vær venlig mod dig selv, og mind dig om alt det, du gør rigtigt. Rory har vendt de værste starter til sejre ved at spille det næste slag frit, uden vrede. Slip det, og spil videre med ro."},
+  godt:"Flot. Spil frit, og lad det gode hul bekræfte, at din plan virker. Men bliv tålmodig; en runde vindes ikke på ét hul. Bliv i din boble, hold rytmen, og tag den næste beslutning lige så roligt. Momentum er bare tålmodighed, der får lov at fortsætte.",
+  okay:"Rory minder dig om, at golf er en lang dag, og tålmodighed er dit skarpeste våben. Du behøver ikke tvinge noget. Bliv i processen, spil dine chancer, når de kommer, og accepter de huller, der bare skal overstås. Pointene samler sig, når du ikke jagter dem.",
+  daarligt:"Rory siger det, han selv måtte lære på den hårde måde: du skal være din egen bedste ven derude, ikke din værste kritiker. Skæld ikke dig selv ud. Ét hul definerer hverken din runde eller dig. Træk vejret dybt, vær venlig mod dig selv, og mind dig om alt det, du gør rigtigt. Rory har vendt de værste starter til sejre ved at spille det næste slag frit, uden vrede. Slip det, og spil videre med ro."},
  {n:"Jack Nicklaus",
-  godt:"Nicklaus ville nikke — og så minde dig om, at ét godt hul intet beviser endnu. Bliv ydmyg, bliv skarp, og lad ikke selvtilliden blive til skødesløshed. De 18 huller belønner den, der bliver ved at træffe kloge valg, længe efter følelsen har lagt sig.",
-  okay:"Jack vandt 18 majors — flere end nogen anden — næsten aldrig ved at være vild, men ved altid at spille det klogeste slag og undgå det store tal. Et okay hul passer perfekt ind i den plan. Bliv tålmodig, spil mod midten, og lad de svære huller passere uden skade.",
-  daarligt:"Nicklaus lod aldrig ét hul rasle ham, og hemmeligheden var mental billeddannelse: 'jeg 3-puttede aldrig i mit hoved.' Inden du slår næste slag, så SE det lykkes — tydeligt, i detaljer, positivt — og udfør så din plan uden tvivl. Et dårligt hul lever kun, hvis du bliver ved at spille det om i hovedet. Læg det væk, tegn det næste gode slag for dit indre blik, og gå roligt videre. Tvivl er bare et billede, du kan vælge at male om."},
+  godt:"Nicklaus ville nikke, og så minde dig om, at ét godt hul intet beviser endnu. Bliv ydmyg, bliv skarp, og lad ikke selvtilliden blive til skødesløshed. De 18 huller belønner den, der bliver ved at træffe kloge valg, længe efter følelsen har lagt sig.",
+  okay:"Jack vandt 18 majors, flere end nogen anden, næsten aldrig ved at være vild, men ved altid at spille det klogeste slag og undgå det store tal. Et okay hul passer perfekt ind i den plan. Bliv tålmodig, spil mod midten, og lad de svære huller passere uden skade.",
+  daarligt:"Nicklaus lod aldrig ét hul rasle ham, og hemmeligheden var mental billeddannelse: 'jeg missede aldrig en putt i mit hoved.' Inden du slår næste slag, så SE det lykkes. Tydeligt, i detaljer, positivt. Og udfør så din plan uden tvivl. Et dårligt hul lever kun, hvis du bliver ved at spille det om i hovedet. Læg det væk, tegn det næste gode slag for dit indre blik, og gå roligt videre. Tvivl er bare et billede, du kan vælge at male om."},
  {n:"Seve Ballesteros",
-  godt:"Seve ville elske det — spil med hjertet, med fantasi, med glæde. Men behold hovedet koldt til næste slag: passionen skal tændes, ikke løbe løbsk. Nyd øjeblikket, og bær energien med til næste tee som selvtillid, ikke overmod.",
-  okay:"Seve fandt altid en vej — også fra steder, ingen troede var mulige. Et okay hul er ingen sag; bliv kreativ, bliv i kampen, og vent på det øjeblik, hvor din fantasi kan lave et point ud af ingenting.",
-  daarligt:"Seve reddede pars fra parkeringspladser og grusveje, fordi han troede benhårdt på én ting: der er ALTID en vej ud. Et dårligt hul er ikke en straf — det er en invitation til at vise, hvor sej og opfindsom du er. Ryst det af, tænd ilden i maven, og se det næste slag som en chance for at gøre noget mindeværdigt. Golf handler ikke om at undgå fejl; det handler om at komme stærkt tilbage fra dem."},
+  godt:"Seve ville elske det. Spil med hjertet, med fantasi, med glæde. Men behold hovedet koldt til næste slag: passionen skal tændes, ikke løbe løbsk. Nyd øjeblikket, og bær energien med til næste tee som selvtillid, ikke overmod.",
+  okay:"Seve fandt altid en vej. Også fra steder, ingen troede var mulige. Et okay hul er ingen sag; bliv kreativ, bliv i kampen, og vent på det øjeblik, hvor din fantasi kan lave et point ud af ingenting.",
+  daarligt:"Seve reddede pars fra parkeringspladser og grusveje, fordi han troede benhårdt på én ting: der er ALTID en vej ud. Et dårligt hul er ikke en straf. Det er en invitation til at vise, hvor sej og opfindsom du er. Ryst det af, tænd ilden i maven, og se det næste slag som en chance for at gøre noget mindeværdigt. Golf handler ikke om at undgå fejl; det handler om at komme stærkt tilbage fra dem."},
  {n:"Gary Player",
-  godt:"Gary Player ville sige: dét er, hvad en positiv indstilling gør. Vælg at tro på det gode — men bliv ydmyg og arbejdsom, for holdningen skal holde 18 huller. Gå selvsikkert videre, og lad optimismen være en beslutning, du træffer igen på hver tee.",
+  godt:"Gary Player ville sige: dét er, hvad en positiv indstilling gør. Vælg at tro på det gode. Men bliv ydmyg og arbejdsom, for holdningen skal holde 18 huller. Gå selvsikkert videre, og lad optimismen være en beslutning, du træffer igen på hver tee.",
   okay:"Player levede efter 'jo hårdere jeg arbejder, jo heldigere bliver jeg.' Et okay hul er tålmodighedens arbejde, der betaler sig. Bliv ved, bliv positiv, og stol på, at de solide huller lægger grunden til, at heldet vender din vej senere.",
-  daarligt:"Gary Player så modgang som en mulighed hele sit liv — og vandt majors på fem kontinenter på præcis den indstilling. Et dårligt hul tester din holdning, ikke dit sving. Så vælg optimismen aktivt: ret ryggen, træk vejret, sæt et lille smil på, og gå til næste slag som en helt ny start. Den, der bevarer troen længst, vinder til sidst. Viljen slår talent, når det bliver svært."},
+  daarligt:"Gary Player så modgang som en mulighed hele sit liv, og vandt majors på fem kontinenter på præcis den indstilling. Et dårligt hul tester din holdning, ikke dit sving. Så vælg optimismen aktivt: ret ryggen, træk vejret, sæt et lille smil på, og gå til næste slag som en helt ny start. Den, der bevarer troen længst, vinder til sidst. Viljen slår talent, når det bliver svært."},
  {n:"Bobby Jones",
-  godt:"Bobby Jones ville minde dig om, at spillet i virkeligheden foregår på banen mellem dine ører. Et godt hul kommer af ro og selvbeherskelse — så bliv i den tilstand. Lad ikke begejstringen forstyrre den ligevægt, der lige vandt dig hullet.",
-  okay:"Jones sagde, at mestring frem for alt er selvbeherskelse. Et okay hul er sindsro i praksis. Bliv rolig, bliv i din plan, og lad temperamentet være dit — ikke omvendt — så tager du de svære huller uden skade.",
-  daarligt:"Bobby Jones — en af de største nogensinde — sagde det klarest: 'golf spilles primært på en bane på fjorten centimeter: den mellem dine ører.' Et dårligt hul vandt lige det indre spil fra dig. Tag det tilbage nu: træk vejret langsomt, behersk dig selv, og nægt at lade ét hul afgøre dit humør eller din dag. Jones brændte selv af temperament som ung og blev stor, da han lærte at styre det. Spil det næste slag som den rolige, samlede spiller, du vælger at være."},
+  godt:"Bobby Jones ville minde dig om, at spillet i virkeligheden foregår på banen mellem dine ører. Et godt hul kommer af ro og selvbeherskelse. Så bliv i den tilstand. Lad ikke begejstringen forstyrre den ligevægt, der lige vandt dig hullet.",
+  okay:"Jones sagde, at mestring frem for alt er selvbeherskelse. Et okay hul er sindsro i praksis. Bliv rolig, bliv i din plan, og lad temperamentet være dit. Ikke omvendt. Så tager du de svære huller uden skade.",
+  daarligt:"Bobby Jones, en af de største nogensinde, sagde det klarest: 'golf spilles primært på en bane på fjorten centimeter: den mellem dine ører.' Et dårligt hul vandt lige det indre spil fra dig. Tag det tilbage nu: træk vejret langsomt, behersk dig selv, og nægt at lade ét hul afgøre dit humør eller din dag. Jones brændte selv af temperament som ung og blev stor, da han lærte at styre det. Spil det næste slag som den rolige, samlede spiller, du vælger at være."},
  {n:"Ben Hogan",
-  godt:"Hogan ville advare dig: ét godt slag betyder intet uden det næste. Nyd det køligt, og gå tilbage til din disciplin. De bedste bygger runder af gentagelse, ikke af følelser — så gentag det, der lige virkede, uden at blive skødesløs.",
+  godt:"Hogan ville advare dig: ét godt slag betyder intet uden det næste. Nyd det køligt, og gå tilbage til din disciplin. De bedste bygger runder af gentagelse, ikke af følelser. Så gentag det, der lige virkede, uden at blive skødesløs.",
   okay:"Hogan dyrkede den præcise, gentagelige rutine mere end nogen. Et okay hul er den disciplin, der arbejder. Kedeligt er stærkt. Gentag din opsætning nøjagtigt, ram dit target, og lad de rene, enkle huller stable sig op.",
-  daarligt:"Ben Hogan kom tilbage fra en næsten dødelig bilulykke og vandt majors igen — på ren disciplin. Hans regel var enkel: det vigtigste slag i golf er altid det næste. Det forrige er væk; du kan ikke spille det om. Så gå til næste tee med iskold rutine — samme opsætning, samme åndedræt, samme target — og lad følelserne blive tilbage på det forrige hul. Følelser er valgfrie. Rutinen er ikke."},
+  daarligt:"Ben Hogan kom tilbage fra en næsten dødelig bilulykke og vandt majors igen på ren disciplin. Hans regel var enkel: det vigtigste slag i golf er altid det næste. Det forrige er væk; du kan ikke spille det om. Så gå til næste tee med iskold rutine. Samme opsætning, samme åndedræt, samme target. Og lad følelserne blive tilbage på det forrige hul. Følelser er valgfrie. Rutinen er ikke."},
  {n:"Arnold Palmer",
-  godt:"Arnold Palmer ville grine og sige: dét er sjovt, ikke? Spil med glæde og mod — men gå frimodigt, ikke skødesløst, til det næste. Palmer vandt hjerter og majors ved at nyde kampen; bær den energi videre som selvtillid.",
-  okay:"Palmer sagde: 'sving hårdt, hvis du kan finde bolden bagefter.' Et okay hul er ingen grund til at trække sig sammen. Bliv i angrebet — men vælg dine øjeblikke med hovedet, og lad modet være styret, ikke vildt.",
-  daarligt:"Arnold Palmer — 'The King' — spillede altid modigt, men lod aldrig et dårligt hul stjæle glæden ved spillet. Han vidste, at frygt får dig til at spille forsigtigt og halvhjertet, og dét koster flere slag end selve fejlen. Så ryst det af med et smil, gå frimodigt til næste tee, og forpligt dig 100% til det slag, du TROR på — spil det med hele hjertet. Mod, klogt styret, slår tøven hver gang. Kom så."},
+  godt:"Arnold Palmer ville grine og sige: dét er sjovt, ikke? Spil med glæde og mod. Men gå frimodigt, ikke skødesløst, til det næste. Palmer vandt hjerter og majors ved at nyde kampen; bær den energi videre som selvtillid.",
+  okay:"Palmer sagde: 'sving hårdt, hvis du kan finde bolden bagefter.' Et okay hul er ingen grund til at trække sig sammen. Bliv i angrebet. Men vælg dine øjeblikke med hovedet, og lad modet være styret, ikke vildt.",
+  daarligt:"Arnold Palmer, 'The King', spillede altid modigt, men lod aldrig et dårligt hul stjæle glæden ved spillet. Han vidste, at frygt får dig til at spille forsigtigt og halvhjertet, og dét koster flere slag end selve fejlen. Så ryst det af med et smil, gå frimodigt til næste tee, og forpligt dig 100% til det slag, du TROR på. Spil det med hele hjertet. Mod, klogt styret, slår tøven hver gang. Kom så."},
  {n:"Nick Faldo",
-  godt:"Faldo ville sige: godt — nu gør det igen, præcis lige så metodisk. Ét godt hul beviser ingenting; en runde bygges af gentagelse. Bliv kølig, bliv i din proces, og lad ikke det gode hul lokke dig ud af den disciplin, der skabte det.",
-  okay:"Nick Faldo vandt sine majors på jerndisciplin, ikke på drama — én solid, tålmodig beslutning ad gangen. Et okay hul er præcis den plan, der virker. Bliv tålmodig, bliv præcis, og stol på, at kedeligt og konsekvent slår vildt og genialt over 18 huller.",
-  daarligt:"Nick Faldo byggede sine seks majors på iskold tålmodighed — han tog ét hul ad gangen med sikre beslutninger og ventede på, at modstanderen knækkede først. Et dårligt hul? Så tilbage til rutinen med det samme. Fjern følelsen, vælg det sikreste næste slag, og ram dit target uden drama. Faldo vidste, at den, der holder hovedet koldt længst, står tilbage til sidst. Disciplin er ikke glamourøs — men den vinder, når presset stiger."}
+  godt:"Faldo ville sige: godt. Nu gør det igen, præcis lige så metodisk. Ét godt hul beviser ingenting; en runde bygges af gentagelse. Bliv kølig, bliv i din proces, og lad ikke det gode hul lokke dig ud af den disciplin, der skabte det.",
+  okay:"Nick Faldo vandt sine majors på jerndisciplin, ikke på drama, men på én solid, tålmodig beslutning ad gangen. Et okay hul er præcis den plan, der virker. Bliv tålmodig, bliv præcis, og stol på, at kedeligt og konsekvent slår vildt og genialt over 18 huller.",
+  daarligt:"Nick Faldo byggede sine seks majors på iskold tålmodighed. Han tog ét hul ad gangen med sikre beslutninger og ventede på, at modstanderen knækkede først. Et dårligt hul? Så tilbage til rutinen med det samme. Fjern følelsen, vælg det sikreste næste slag, og ram dit target uden drama. Faldo vidste, at den, der holder hovedet koldt længst, står tilbage til sidst. Disciplin er ikke glamourøs. Men den vinder, når presset stiger."}
 ];
 const WON={
  "Arnold Palmer":"7 majors · 'The King'",
- "Nick Faldo":"6 majors · Europas Ryder Cup-rekordmand",
+ "Nick Faldo":"6 majors · Europas Ryder Cup rekordmand",
  "Tiger Woods":"15 majors",
- "Rory McIlroy":"5 majors · karriere-Grand Slam",
- "Jack Nicklaus":"18 majors — flest i historien",
- "Seve Ballesteros":"5 majors · Ryder Cup-ikon",
- "Gary Player":"9 majors · karriere-Grand Slam",
+ "Rory McIlroy":"5 majors · karriere Grand Slam",
+ "Jack Nicklaus":"18 majors, flest i historien",
+ "Seve Ballesteros":"5 majors · Ryder Cup ikon",
+ "Gary Player":"9 majors · karriere Grand Slam",
  "Bobby Jones":"Grand Slam 1930 · grundlagde Masters",
- "Ben Hogan":"9 majors · comeback-legende"
+ "Ben Hogan":"9 majors · comeback legende"
 };
 const LEGPIC={"Tiger Woods":"tiger","Rory McIlroy":"rory","Jack Nicklaus":"nicklaus","Seve Ballesteros":"seve","Gary Player":"player","Bobby Jones":"jones","Ben Hogan":"hogan","Arnold Palmer":"palmer","Nick Faldo":"faldo"};
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
-/* Skyrup gul tee — RET disse når scorekortets/Golfbox' officielle tal er bekræftet.
+/* Skyrup gul tee. RET disse når scorekortets/Golfbox' officielle tal er bekræftet.
    allowance = handicap-tildeling (1.00 = fuldt, 0.95 = 95% individuel stableford). */
 const RATING={cr:67.4, slope:123, allowance:1.00};
 const USA=[
@@ -426,101 +426,101 @@ const USA=[
  {n:"Marc Riesel",h:14.2},{n:"Chris",h:13.8},{n:"Simon Cahill",h:21},{n:"Michael Messing Thorsen",h:22.2}
 ];
 
-// tee.club / target / miss / approach — fra eksisterende Skyrup-caddiedata (aflæst 18 hulkort). Intet opdigtet.
+// tee.club / target / miss / approach. Fra eksisterende Skyrup-caddiedata (aflæst 18 hulkort). Intet opdigtet.
 const HOLES=[
- {n:1,par:4,idx:6,len:310,tee:{club:"5-wood",target:"Højre-center",miss:"Højre — OB/bæk hele venstre"},approach:"Wedge → center green",haz:'<span class="w">Bæk/OB langs HELE venstre</span> · bunkers højre',
-  why:{a:{k:"Kort åbningshul — driver og en kort pitch ind.",n:"Driver mod OB venstre: én lille træk og du ligger ude af banen.",d:"5-wood til fairway, wedge tæt. Åbn med en chance, ikke en straf."},
-       t:{k:"Bare kom i gang — tag driveren.",n:"Ikke driver — venstre er OB fra første sving, og kroppen er kold.",d:"5-wood højre-center, wedge til midten. Rolig par mens du varmer op."},
-       g:{k:"Nu skal jeg bare ramme noget.",n:"Ikke et vildt slag mod OB'en venstre.",d:"To trygge slag ned ad højre, pitch på. Du har slag her — net par er guld."}}},
- {n:2,par:4,idx:4,len:345,tee:{club:"5-wood",target:"Center",miss:"Højre — tæt skov venstre"},approach:"Kort jern → venstre for green (dam højre)",haz:'Tæt skov HELE venstre · <span class="w">dam højre kort før green</span>',
-  why:{a:{k:"Fairwayen buer højre — jeg genner hjørnet med driver.",n:"Ikke flirte med skoven venstre for at spare meter.",d:"5-wood center, kort jern til VENSTRE for green — dammen er højre."},
-       t:{k:"Længere hul, jeg har brug for driver.",n:"Ikke sigte venstre — skoven æder den.",d:"5-wood center, sigt greenens venstre halvdel væk fra dammen. Bogey er fint."},
-       g:{k:"Langt hul, jeg presser.",n:"Ikke gå efter green over dammen højre.",d:"Tre slag ned ad midten, læg op, pitch på. Slag-hul = net par."}}},
- {n:3,par:3,idx:18,len:125,tee:{club:"Kort jern",target:"Center green",miss:"Bunkers rundt — sigt midten"},approach:null,haz:'Green med bunkers · intet vand · letteste hul',
-  why:{a:{k:"Kort par-3 — flaget kalder.",n:"Ikke prikke et flag der sidder bag en bunker.",d:"Kort jern til center. Birdie-hullet — tag putten."},
-       t:{k:"Endelig et kort et.",n:"Ikke blive grådig mod kanten.",d:"Jern til midten, to-put par. Nemt point."},
-       g:{k:"Kort — det kan jeg.",n:"Ikke stresse over bunkerne.",d:"Sigt midten af green. Par er inden for rækkevidde her."}}},
- {n:4,par:5,idx:10,len:465,tee:{club:"5-wood",target:"Center",miss:"Højre — vand v. green"},approach:"Lay-up → wedge fra højre",haz:'<span class="w">Vand venstre-front af green</span> · fairwaybunkers · kort par-5',
-  why:{a:{k:"Kort par-5 — den når jeg i to.",n:"Ikke gå for green over vandet venstre-front.",d:"Kom til HØJRE for green-vandet, wedge tæt. Eagle-put slår en våd bold."},
-       t:{k:"Måske kan jeg nå den.",n:"Ikke tvinge et langt 2. slag mod vandet.",d:"5-wood → 5-wood → wedge. Disciplin giver en birdie-chance."},
-       g:{k:"Par-5 — nu smækker jeg.",n:"Ikke jag distance mod green-vandet.",d:"Tre-fire rolige slag, wedge fra højre. Net birdie er realistisk."}}},
- {n:5,par:4,idx:12,len:335,tee:{club:"5-wood",target:"Kort af fairway-dammen",miss:"Læg kort — dam i landingszonen"},approach:"Wedge → venstre for green-dam",haz:'<span class="w">Dam MIDT i fairway</span> (landingszone) · dam kort-højre for green',
-  why:{a:{k:"Åben fairway — driver frem.",n:"Driveren lander lige I dammen midt i fairwayen.",d:"5-wood KORT af vandet, wedge ind. Position slår længde her."},
-       t:{k:"Kort par-4, driver og wedge.",n:"Ikke driver — vandet ligger i din landingszone.",d:"5-wood kort af dammen, kort jern venstre for green-vandet."},
+ {n:1,par:4,idx:6,len:310,tee:{club:"5 wood",target:"Højre center",miss:"Højre. OB/bæk hele venstre"},approach:"Wedge → center green",haz:'<span class="w">Bæk/OB langs HELE venstre</span> · bunkers højre',
+  why:{a:{k:"Kort åbningshul. Driver og en kort pitch ind.",n:"Driver mod OB venstre: én lille træk og du ligger ude af banen.",d:"5 wood til fairway, wedge tæt. Åbn med en chance, ikke en straf."},
+       t:{k:"Bare kom i gang. Tag driveren.",n:"Ikke driver. Venstre er OB fra første sving, og kroppen er kold.",d:"5 wood højre center, wedge til midten. Rolig par mens du varmer op."},
+       g:{k:"Nu skal jeg bare ramme noget.",n:"Ikke et vildt slag mod OB'en venstre.",d:"To trygge slag ned ad højre, pitch på. Du har slag her. Net par er guld."}}},
+ {n:2,par:4,idx:4,len:345,tee:{club:"5 wood",target:"Center",miss:"Højre. Tæt skov venstre"},approach:"Kort jern → venstre for green (dam højre)",haz:'Tæt skov HELE venstre · <span class="w">dam højre kort før green</span>',
+  why:{a:{k:"Fairwayen buer højre. Jeg genner hjørnet med driver.",n:"Ikke flirte med skoven venstre for at spare meter.",d:"5 wood center, kort jern til VENSTRE for green. Dammen er højre."},
+       t:{k:"Længere hul, jeg har brug for driver.",n:"Ikke sigte venstre. Skoven æder den.",d:"5 wood center, sigt greenens venstre halvdel væk fra dammen. Bogey er fint."},
+       g:{k:"Langt hul, jeg presser.",n:"Ikke gå efter green over dammen højre.",d:"Tre slag ned ad midten, læg op, pitch på. Slaghul = net par."}}},
+ {n:3,par:3,idx:18,len:125,tee:{club:"Kort jern",target:"Center green",miss:"Bunkers rundt. Sigt midten"},approach:null,haz:'Green med bunkers · intet vand · letteste hul',
+  why:{a:{k:"Kort par 3. Flaget kalder.",n:"Ikke prikke et flag der sidder bag en bunker.",d:"Kort jern til center. Birdiehullet. Tag putten."},
+       t:{k:"Endelig et kort et.",n:"Ikke blive grådig mod kanten.",d:"Jern til midten, to putts og par. Nemt point."},
+       g:{k:"Kort. Det kan jeg.",n:"Ikke stresse over bunkerne.",d:"Sigt midten af green. Par er inden for rækkevidde her."}}},
+ {n:4,par:5,idx:10,len:465,tee:{club:"5 wood",target:"Center",miss:"Højre. Vand v. green"},approach:"Layup → wedge fra højre",haz:'<span class="w">Vand venstre front af green</span> · fairwaybunkers · kort par 5',
+  why:{a:{k:"Kort par 5. Den når jeg i to.",n:"Ikke gå for green over vandet venstre front.",d:"Kom til HØJRE for vandet ved green, wedge tæt. Eagleput slår en våd bold."},
+       t:{k:"Måske kan jeg nå den.",n:"Ikke tvinge et langt 2. slag mod vandet.",d:"5 wood → 5 wood → wedge. Disciplin giver en birdiechance."},
+       g:{k:"Par 5. Nu smækker jeg.",n:"Ikke jag distance mod vandet ved green.",d:"Tre til fire rolige slag, wedge fra højre. Net birdie er realistisk."}}},
+ {n:5,par:4,idx:12,len:335,tee:{club:"5 wood",target:"Kort af dammen i fairwayen",miss:"Læg kort. Dam i landingszonen"},approach:"Wedge → venstre for green dam",haz:'<span class="w">Dam MIDT i fairway</span> (landingszone) · dam kort/højre for green',
+  why:{a:{k:"Åben fairway. Driver frem.",n:"Driveren lander lige I dammen midt i fairwayen.",d:"5 wood KORT af vandet, wedge ind. Position slår længde her."},
+       t:{k:"Kort par 4, driver og wedge.",n:"Ikke driver. Vandet ligger i din landingszone.",d:"5 wood kort af dammen, kort jern venstre for vandet ved green."},
        g:{k:"Jeg tager en stor en.",n:"Ikke smække mod vandet i fairwayen.",d:"To korte slag udenom dammen. Bogey er en fin score."}}},
- {n:6,par:3,idx:16,len:135,tee:{club:"Jern — rigelig kølle",target:"Center green",miss:"Vand begge sider — tag nok kølle"},approach:null,haz:'<span class="w">Vand på BEGGE sider af green</span> · tag nok kølle',
-  why:{a:{k:"Kort — jeg dropper den tæt.",n:"Ikke komme kort; vandet venter foran og ved siden.",d:"Rigelig kølle til center. Fuglen er der, men tag greenen først."},
-       t:{k:"Kort par-3.",n:"Ikke bail-out mod vandet i siderne.",d:"Nok kølle, center green. Par er stærkt."},
+ {n:6,par:3,idx:16,len:135,tee:{club:"Jern. Rigelig kølle",target:"Center green",miss:"Vand begge sider. Tag nok kølle"},approach:null,haz:'<span class="w">Vand på BEGGE sider af green</span> · tag nok kølle',
+  why:{a:{k:"Kort. Jeg dropper den tæt.",n:"Ikke komme kort; vandet venter foran og ved siden.",d:"Rigelig kølle til center. Fuglen er der, men tag greenen først."},
+       t:{k:"Kort par 3.",n:"Spil ikke defensivt mod vandet i siderne.",d:"Nok kølle, center green. Par er stærkt."},
        g:{k:"Kort hul, fint.",n:"Ikke lægge den kort ned i vandet.",d:"Tag én kølle mere, sigt midten. Vandet straffer den korte."}}},
- {n:7,par:4,idx:8,len:330,tee:{club:"5-wood",target:"Center",miss:"Højre — sø venstre v. green"},approach:"Kort jern → højre halvdel af green",haz:'<span class="w">Stor sø VENSTRE for green</span> · fairwaybunkers',
-  why:{a:{k:"Kort — jeg angriber flaget.",n:"Ikke sigte venstre mod søen ved green.",d:"5-wood af tee, indspil til HØJRE halvdel. Søen venstre er død."},
-       t:{k:"Driver frem.",n:"Ikke lade indspillet drive venstre mod vandet.",d:"5-wood center, spil til højre for flaget."},
+ {n:7,par:4,idx:8,len:330,tee:{club:"5 wood",target:"Center",miss:"Højre. Sø venstre v. green"},approach:"Kort jern → højre halvdel af green",haz:'<span class="w">Stor sø VENSTRE for green</span> · fairwaybunkers',
+  why:{a:{k:"Kort. Jeg angriber flaget.",n:"Ikke sigte venstre mod søen ved green.",d:"5 wood af tee, indspil til HØJRE halvdel. Søen venstre er død."},
+       t:{k:"Driver frem.",n:"Ikke lade indspillet drive venstre mod vandet.",d:"5 wood center, spil til højre for flaget."},
        g:{k:"Nu presser jeg.",n:"Ikke gå efter green venstre over vand.",d:"Læg op kort, pitch fra højre. Undgå søen, tag point."}}},
- {n:8,par:4,idx:2,len:380,tee:{club:"5-wood",target:"Kort af cross-bækken",miss:"Højre"},approach:"Langt jern ind",haz:'<span class="w">Bæk KRYDSER fairwayen</span> i layup · dam venstre · 2.-hårdeste',
-  why:{a:{k:"Langt idx 2 — jeg skal bruge længde.",n:"Driveren når bækken der krydser fairwayen.",d:"5-wood KORT af bækken, langt jern ind. Par slår alle her."},
-       t:{k:"Svært hul, tag driver.",n:"Ikke smække i bækken over fairwayen.",d:"5-wood kort af vandet. Accepter bogey, jag ikke."},
-       g:{k:"Langt — jeg svinger hårdt.",n:"Ikke lange slag lige i bækken.",d:"Tre slag i spil, kort af bækken. Du får slag — net par er muligt."}}},
- {n:9,par:4,idx:14,len:300,tee:{club:"5-wood",target:"Højre-center",miss:"Højre — damme venstre"},approach:"Wedge",haz:'<span class="w">Damme langs VENSTRE fairway</span> · kort par-4',
-  why:{a:{k:"300 m — næsten drivbar.",n:"Ikke sigte venstre; damme langs hele siden.",d:"5-wood højre-center, wedge tæt. Birdie uden risiko."},
-       t:{k:"Kort, driver frem.",n:"Ikke mod vandet venstre.",d:"5-wood væk fra vand venstre, kort jern ind."},
+ {n:8,par:4,idx:2,len:380,tee:{club:"5 wood",target:"Kort af bækken",miss:"Højre"},approach:"Langt jern ind",haz:'<span class="w">Bæk KRYDSER fairwayen</span> i layup · dam venstre · 2. hårdeste',
+  why:{a:{k:"Langt idx 2. Jeg skal bruge længde.",n:"Driveren når bækken der krydser fairwayen.",d:"5 wood KORT af bækken, langt jern ind. Par slår alle her."},
+       t:{k:"Svært hul, tag driver.",n:"Ikke smække i bækken over fairwayen.",d:"5 wood kort af vandet. Accepter bogey, jag ikke."},
+       g:{k:"Langt. Jeg svinger hårdt.",n:"Ikke lange slag lige i bækken.",d:"Tre slag i spil, kort af bækken. Du får slag. Net par er muligt."}}},
+ {n:9,par:4,idx:14,len:300,tee:{club:"5 wood",target:"Højre center",miss:"Højre. Damme venstre"},approach:"Wedge",haz:'<span class="w">Damme langs VENSTRE fairway</span> · kort par 4',
+  why:{a:{k:"300 m. Næsten drivbar.",n:"Ikke sigte venstre; damme langs hele siden.",d:"5 wood højre center, wedge tæt. Birdie uden risiko."},
+       t:{k:"Kort, driver frem.",n:"Ikke mod vandet venstre.",d:"5 wood væk fra vand venstre, kort jern ind."},
        g:{k:"Kort hul, chance.",n:"Ikke drift venstre i vandet.",d:"Højre side hele vejen, pitch på."}}},
- {n:10,par:5,idx:11,len:465,tee:{club:"5-wood",target:"Kort af fairway-dammene",miss:"Læg kort af vandet"},approach:"Lay-up → wedge",haz:'<span class="w">To damme i fairwayen</span> (2.-slags-zonen) · kort par-5',
-  why:{a:{k:"Kort par-5 — i to igen.",n:"Ikke tvinge 2. slag blindt mellem dammene.",d:"Placér 2. slag kort af vandet, wedge ind. Birdie."},
-       t:{k:"Jeg går for den.",n:"Ikke over vand du ikke når.",d:"5-wood → lay kort af vandet → wedge. Tålmodighed."},
-       g:{k:"Par-5, smæk.",n:"Ikke mod damme du ikke rækker.",d:"Tre-fire slag, læg op. Net birdie."}}},
- {n:11,par:3,idx:9,len:175,tee:{club:"5-wood / langt jern",target:"Center green",miss:"Foran green"},approach:null,haz:'Længste par-3 · bunkers begge sider · træer venstre',
-  why:{a:{k:"Langt par-3 — jeg nagler den.",n:"Ikke overpower; bunkers begge sider.",d:"Langt jern/5-wood til center. Par er godt."},
+ {n:10,par:5,idx:11,len:465,tee:{club:"5 wood",target:"Kort af dammene i fairwayen",miss:"Læg kort af vandet"},approach:"Layup → wedge",haz:'<span class="w">To damme i fairwayen</span> (2. slags zonen) · kort par 5',
+  why:{a:{k:"Kort par 5. I to igen.",n:"Ikke tvinge 2. slag blindt mellem dammene.",d:"Placér 2. slag kort af vandet, wedge ind. Birdie."},
+       t:{k:"Jeg går for den.",n:"Ikke over vand du ikke når.",d:"5 wood → lay kort af vandet → wedge. Tålmodighed."},
+       g:{k:"Par 5, smæk.",n:"Ikke mod damme du ikke rækker.",d:"Tre til fire slag, læg op. Net birdie."}}},
+ {n:11,par:3,idx:9,len:175,tee:{club:"5 wood / langt jern",target:"Center green",miss:"Foran green"},approach:null,haz:'Længste par 3 · bunkers begge sider · træer venstre',
+  why:{a:{k:"Langt par 3. Jeg nagler den.",n:"Ikke overpower; bunkers begge sider.",d:"Langt jern/5 wood til center. Par er godt."},
        t:{k:"Langt et.",n:"Ikke tvinge mod flaget.",d:"Nok kølle, center. Bogey er ingen skam."},
-       g:{k:"Langt — svært.",n:"Ikke jag hele vejen i ét slag.",d:"Læg foran green, pitch+put. Slag-hul = net par."}}},
- {n:12,par:4,idx:1,len:375,tee:{club:"5-wood",target:"Mellem dammene",miss:"Damme begge sider — placér"},approach:"Langt jern ind",haz:'<span class="w">Damme VENSTRE og HØJRE i landing</span> · vand nær green · BANENS HÅRDESTE',
-  why:{a:{k:"Idx 1 — driveren skal ud.",n:"Driveren finder dammene venstre/højre i landingen.",d:"5-wood placeret mellem vandet. Par vinder hullet."},
-       t:{k:"Hårdest — jeg må presse.",n:"Ikke driver mod damme på begge sider.",d:"5-wood sikkert i spil, langt jern ind. Bogey = sejr."},
-       g:{k:"Banens sværeste, uh.",n:"Ikke helteslag mod vandet.",d:"Tre-fire trygge slag. Du får slag (måske to) — net par/bogey."}}},
- {n:13,par:4,idx:3,len:365,tee:{club:"5-wood",target:"Center, foran dammene",miss:"Kort af vandet"},approach:"Kort jern ind",haz:'<span class="w">Damme på BEGGE sider</span> midt-fairway · træer',
-  why:{a:{k:"Jeg smækker forbi vandet.",n:"Ikke bomme længde mod damme på begge sider.",d:"5-wood center, foran dammene. Præcision > længde."},
-       t:{k:"Svært, tag driver.",n:"Ikke prøve at nå mellem vandet med driver.",d:"5-wood mellem vandet, kort ind. Bogey ok."},
-       g:{k:"Vand alle vegne.",n:"Ikke helteslag.",d:"Læg kort af vandet. Slag-hul, net par."}}},
- {n:14,par:3,idx:13,len:140,tee:{club:"Jern — rigelig kølle",target:"Højre/center green",miss:"Højre — sø hele venstre"},approach:null,haz:'<span class="w">Stor sø hele VENSTRE</span> · green hævet højre bag stenmur',
-  why:{a:{k:"Greenen er lige der — jeg fyrer på flaget.",n:"Ikke sigte venstre; hele siden er sø.",d:"Nok kølle til greenens højre/center. Aldrig venstre."},
-       t:{k:"Kort par-3.",n:"Ikke bail venstre mod søen.",d:"Sigt højre halvdel, rigelig kølle."},
-       g:{k:"Vand hele venstre — nervøs.",n:"Ikke sigte mod flaget hvis det står venstre.",d:"Spil sikkert til højre — hellere bunker end sø."}}},
- {n:15,par:4,idx:7,len:320,tee:{club:"5-wood / hybrid",target:"Center (smal passage)",miss:"Center — træer begge sider"},approach:"Kort jern",haz:'Smal træpassage begge sider · greenbunker højre',
-  why:{a:{k:"Kort — driver ned ad slugten.",n:"Ikke driver i en smal træpassage.",d:"5-wood/hybrid ren center, wedge tæt."},
-       t:{k:"Kort hul, driver.",n:"Ikke risikere træerne på begge sider.",d:"Præcision fra tee — center, kort jern."},
-       g:{k:"Smalt — uh.",n:"Ikke tvinge længde mellem træerne.",d:"Sikkert ned ad midten i to, pitch på. Net par."}}},
- {n:16,par:4,idx:17,len:315,tee:{club:"5-wood",target:"Højre for dammen",miss:"Højre"},approach:"Wedge — angrib green",haz:'<span class="w">Dam midt-venstre</span> i fairway · ellers venligt',
-  why:{a:{k:"Venligt hul — jeg angriber.",n:"Ikke drift venstre i dammen.",d:"Højre for dammen, wedge — angrib green."},
-       t:{k:"Chance-hul.",n:"Ikke mod vandet venstre.",d:"5-wood højre for vandet, kort jern."},
+       g:{k:"Langt. Svært.",n:"Ikke jag hele vejen i ét slag.",d:"Læg foran green, pitch+put. Slaghul = net par."}}},
+ {n:12,par:4,idx:1,len:375,tee:{club:"5 wood",target:"Mellem dammene",miss:"Damme begge sider. Placér"},approach:"Langt jern ind",haz:'<span class="w">Damme VENSTRE og HØJRE i landing</span> · vand nær green · BANENS HÅRDESTE',
+  why:{a:{k:"Idx 1. Driveren skal ud.",n:"Driveren finder dammene venstre/højre i landingen.",d:"5 wood placeret mellem vandet. Par vinder hullet."},
+       t:{k:"Hårdest. Jeg må presse.",n:"Ikke driver mod damme på begge sider.",d:"5 wood sikkert i spil, langt jern ind. Bogey = sejr."},
+       g:{k:"Banens sværeste, uh.",n:"Ikke helteslag mod vandet.",d:"Tre til fire trygge slag. Du får slag (måske to). Net par/bogey."}}},
+ {n:13,par:4,idx:3,len:365,tee:{club:"5 wood",target:"Center, foran dammene",miss:"Kort af vandet"},approach:"Kort jern ind",haz:'<span class="w">Damme på BEGGE sider</span> midt-fairway · træer',
+  why:{a:{k:"Jeg smækker forbi vandet.",n:"Ikke bomme længde mod damme på begge sider.",d:"5 wood center, foran dammene. Præcision > længde."},
+       t:{k:"Svært, tag driver.",n:"Ikke prøve at nå mellem vandet med driver.",d:"5 wood mellem vandet, kort ind. Bogey ok."},
+       g:{k:"Vand alle vegne.",n:"Ikke helteslag.",d:"Læg kort af vandet. Slaghul, net par."}}},
+ {n:14,par:3,idx:13,len:140,tee:{club:"Jern. Rigelig kølle",target:"Højre/center green",miss:"Højre. Sø hele venstre"},approach:null,haz:'<span class="w">Stor sø hele VENSTRE</span> · green hævet højre bag stenmur',
+  why:{a:{k:"Greenen er lige der. Jeg fyrer på flaget.",n:"Ikke sigte venstre; hele siden er sø.",d:"Nok kølle til greenens højre/center. Aldrig venstre."},
+       t:{k:"Kort par 3.",n:"Ikke bail venstre mod søen.",d:"Sigt højre halvdel, rigelig kølle."},
+       g:{k:"Vand hele venstre. Nervøs.",n:"Ikke sigte mod flaget hvis det står venstre.",d:"Spil sikkert til højre. Hellere bunker end sø."}}},
+ {n:15,par:4,idx:7,len:320,tee:{club:"5 wood / hybrid",target:"Center (smal passage)",miss:"Center. Træer begge sider"},approach:"Kort jern",haz:'Smal træpassage begge sider · greenbunker højre',
+  why:{a:{k:"Kort. Driver ned ad slugten.",n:"Ikke driver i en smal træpassage.",d:"5 wood/hybrid ren center, wedge tæt."},
+       t:{k:"Kort hul, driver.",n:"Ikke risikere træerne på begge sider.",d:"Præcision fra tee. Center, kort jern."},
+       g:{k:"Smalt. Uh.",n:"Ikke tvinge længde mellem træerne.",d:"Sikkert ned ad midten i to, pitch på. Net par."}}},
+ {n:16,par:4,idx:17,len:315,tee:{club:"5 wood",target:"Højre for dammen",miss:"Højre"},approach:"Wedge. Angrib green",haz:'<span class="w">Dam midt venstre</span> i fairway · ellers venligt',
+  why:{a:{k:"Venligt hul. Jeg angriber.",n:"Ikke drift venstre i dammen.",d:"Højre for dammen, wedge. Angrib green."},
+       t:{k:"Chancehul.",n:"Ikke mod vandet venstre.",d:"5 wood højre for vandet, kort jern."},
        g:{k:"Et venligere et.",n:"Ikke venstre i dammen.",d:"Højre side, tag din chance for point."}}},
- {n:17,par:4,idx:5,len:360,tee:{club:"5-wood / driver",target:"Højre-center",miss:"Højre — sø venstre"},approach:"Green",haz:'<span class="w">Stor sø VENSTRE for fairway</span> · træer venstre · greenbunkers',
-  why:{a:{k:"Jeg tager driver ned ad venstre linje.",n:"Venstre linje ER søen — dødt.",d:"5-wood/driver højre-center, ALT væk fra venstre."},
+ {n:17,par:4,idx:5,len:360,tee:{club:"5 wood / driver",target:"Højre center",miss:"Højre. Sø venstre"},approach:"Green",haz:'<span class="w">Stor sø VENSTRE for fairway</span> · træer venstre · greenbunkers',
+  why:{a:{k:"Jeg tager driver ned ad venstre linje.",n:"Venstre linje ER søen. Dødt.",d:"5 wood/driver højre center, ALT væk fra venstre."},
        t:{k:"Svært hul sent i runden.",n:"Ikke flirte med søen venstre.",d:"Fairway over længde. Bogey her er guld."},
-       g:{k:"Vand venstre, træt nu.",n:"Ikke jag et slag mod vandet.",d:"Spil langt til højre for søen. Slag-hul — tag point trygt."}}},
- {n:18,par:5,idx:15,len:460,tee:{club:"5-wood",target:"Venstre for vandet",miss:"Venstre — vand højre-center"},approach:"Lay-up → wedge",haz:'<span class="w">Vand højre-center i layup-zonen</span> · træer venstre · afslutning',
-  why:{a:{k:"Jeg afslutter med en birdie i to.",n:"Ikke lay-up lige ind i vandet højre-center.",d:"Lay VENSTRE for vandet, wedge til en birdie-finish."},
-       t:{k:"Sidste hul — pres på.",n:"Ikke mod vandet højre.",d:"5-wood → lay venstre for vandet → wedge. Slut stærkt."},
-       g:{k:"Sidste hul!",n:"Ikke et vildt slag mod vandet.",d:"Tre rolige slag venstre for vandet, pitch på. Net birdie-finale."}}},
+       g:{k:"Vand venstre, træt nu.",n:"Ikke jag et slag mod vandet.",d:"Spil langt til højre for søen. Slaghul. Tag point trygt."}}},
+ {n:18,par:5,idx:15,len:460,tee:{club:"5 wood",target:"Venstre for vandet",miss:"Venstre. Vand højre center"},approach:"Layup → wedge",haz:'<span class="w">Vand højre center i layup zonen</span> · træer venstre · afslutning',
+  why:{a:{k:"Jeg afslutter med en birdie i to.",n:"Ikke layup lige ind i vandet højre center.",d:"Lay VENSTRE for vandet, wedge til en birdiefinish."},
+       t:{k:"Sidste hul. Pres på.",n:"Ikke mod vandet højre.",d:"5 wood → lay venstre for vandet → wedge. Slut stærkt."},
+       g:{k:"Sidste hul!",n:"Ikke et vildt slag mod vandet.",d:"Tre rolige slag venstre for vandet, pitch på. Net birdiefinale."}}},
 ];
 
 const TEEWHY={
- 1:"Kort åbningshul — du skal i spil, ikke langt. Vælg det du rammer lige; OB venstre straffer al overflødig kraft.",
- 2:"Smalt med skov venstre. Meter er ligegyldige hvis du står i træerne — vælg den kølle du sender lige.",
- 3:"Kort par-3: vælg køllen der lander blødt på midten. Jag aldrig et flag bag en bunker.",
- 4:"Par-5 i tre slag — du skal ikke nå den nu. Vælg det du holder i spil; der er god tid til green.",
+ 1:"Kort åbningshul. Du skal i spil, ikke langt. Vælg det du rammer lige; OB venstre straffer al overflødig kraft.",
+ 2:"Smalt med skov venstre. Meter er ligegyldige hvis du står i træerne. Vælg den kølle du sender lige.",
+ 3:"Kort par 3: vælg køllen der lander blødt på midten. Jag aldrig et flag bag en bunker.",
+ 4:"Par 5 i tre slag. Du skal ikke nå den nu. Vælg det du holder i spil; der er god tid til green.",
  5:"Dam midt i fairway: det vigtigste er at STOPPE kort af vandet. Vælg køllen der IKKE når dammen.",
- 6:"Vand på begge sider af green — tag hellere for meget kølle end for lidt. Center vinder hullet.",
- 7:"Kort par-4: du behøver ikke længde. Vælg det sikre og få et rent indspil væk fra søen venstre.",
- 8:"Bæk krydser fairwayen. Vælg køllen der stopper KORT af bækken — placering slår længde her.",
+ 6:"Vand på begge sider af green. Tag hellere for meget kølle end for lidt. Center vinder hullet.",
+ 7:"Kort par 4: du behøver ikke længde. Vælg det sikre og få et rent indspil væk fra søen venstre.",
+ 8:"Bæk krydser fairwayen. Vælg køllen der stopper KORT af bækken. Placering slår længde her.",
  9:"Kun 300 m: vælg det du rammer lige og læg en wedge ind. Damme venstre gør præcision vigtigst.",
- 10:"Par-5: læg tee-slaget hvor du er sikker. Du har to slag mere forbi vandet — ingen grund til at presse.",
- 11:"Længste par-3: vælg den kølle du faktisk rammer rent på 175 — ikke den du håber på. Center, par er godt.",
- 12:"Banens hårdeste, damme på begge sider. Vælg det der lander SIKKERT mellem vandet — kontrol slår alt.",
+ 10:"Par 5: læg teeslaget hvor du er sikker. Du har to slag mere forbi vandet. Ingen grund til at presse.",
+ 11:"Længste par 3: vælg den kølle du faktisk rammer rent på 175. Ikke den du håber på. Center, par er godt.",
+ 12:"Banens hårdeste, damme på begge sider. Vælg det der lander SIKKERT mellem vandet. Kontrol slår alt.",
  13:"Damme på begge sider: vælg køllen der stopper foran vandet. Hellere 150 ind fra fairway end 130 fra søen.",
- 14:"Sø hele venstre — vælg køllen der bærer sikkert til højre/center. Spil aldrig for lidt.",
- 15:"Smal træpassage: rammer du ikke 5-woodet lige, så tag jernet. Fairwayen er alt, meter er intet.",
+ 14:"Sø hele venstre. Vælg køllen der bærer sikkert til højre/center. Spil aldrig for lidt.",
+ 15:"Smal træpassage: rammer du ikke 5 woodet lige, så tag jernet. Fairwayen er alt, meter er intet.",
  16:"Venligt og kort: vælg det du rammer lige, hold højre for dammen, og angrib green med en wedge.",
  17:"Sø venstre hele vejen: vælg det der holder dig i HØJRE side. Placeringen væk fra vandet redder hullet.",
- 18:"Afsluttende par-5: læg tee-slaget sikkert. Du har slagene til at nå frem venstre om vandet."
+ 18:"Afsluttende par 5: læg teeslaget sikkert. Du har slagene til at nå frem venstre om vandet."
 };
 
 /* ---------- state ---------- */
@@ -589,9 +589,9 @@ function renderHome(){
     ${live}
     <div class="manifesto">
       <h3>Sådan vinder vi Skåne</h3>
-      <p>I dag spiller vi ikke otte runder golf. Vi spiller ÉN kamp — som ét hold. Skyrup vinder man ikke med længde. Man vinder den ved at spille <b>banen</b>, ikke sit ego.</p>
+      <p>I dag spiller vi ikke otte runder golf. Vi spiller ÉN kamp. Som ét hold. Skyrup vinder man ikke med længde. Man vinder den ved at spille <b>banen</b>, ikke sit ego.</p>
       <ul>
-        <li><b>Spil banen.</b> Hvert hul fortæller dig præcis, hvad der skal til — tee-kølle, target, og hvor du IKKE må gå. Følg det.</li>
+        <li><b>Spil banen.</b> Hvert hul fortæller dig præcis, hvad der skal til: køllevalg, target og hvor du IKKE må gå. Følg det.</li>
         <li><b>Spil sammen.</b> Den, der lægger op og giver makkeren ro, vinder hullet. Helteslag taber matcher.</li>
         <li><b>Kend dine slag.</b> ${KEND[player.tier]}</li>
       </ul>
@@ -635,7 +635,7 @@ function renderHole(){
   document.getElementById('nextlab').textContent=cur===17?'Summary':('Hul '+HOLES[cur+1].n);
 
   const appr = h.approach ? `<div class="d-appr"><span class="k lab">Approach</span><span class="v">${h.approach}</span></div>`
-    : (h.par===3?'':`<div class="d-appr"><span class="k lab">Approach</span><span class="v missing">— egne yardages</span></div>`);
+    : (h.par===3?'':`<div class="d-appr"><span class="k lab">Approach</span><span class="v missing">, egne yardages</span></div>`);
 
   document.getElementById('holebody').innerHTML=`
     <div class="hhead">
@@ -643,10 +643,10 @@ function renderHole(){
       <div class="hmeta">PAR <b>${h.par}</b> · <b>${h.len}</b> M<br>INDEX <b>${h.idx}</b></div>
     </div>
     <img class="holemap" src="holes/${h.n}.jpg" alt="Hul ${h.n} kort" loading="lazy" onerror="this.style.display='none';var t=this.nextElementSibling;if(t&&t.classList.contains('maphint'))t.style.display='none';" onclick="openMap(${h.n})">
-    <div class="maphint"><span>Hul-kort</span><span>Tryk for fuldt skærm ⤢</span></div>
+    <div class="maphint"><span>Hulkort</span><span>Tryk for fuldt skærm ⤢</span></div>
     <div class="hazbar">⚑ ${h.haz}</div>
     <div class="decide">
-      <div class="d-eyebrow lab">Tee — vælg din</div>
+      <div class="d-eyebrow lab">Vælg din tee</div>
       <div class="teeopts">
         <div class="teeopt primary"><b>${h.tee.club}</b><span>${h.par===3?'rammer center':'mest længde'}</span></div>
         <div class="oror">eller</div>
@@ -733,9 +733,9 @@ function renderSummary(){
       <div class="n9"><div class="k">Front 9</div><div class="v num">${F.g}</div></div>
       <div class="n9"><div class="k">Back 9</div><div class="v num">${B.g}</div></div>
     </div>
-    ${nineTable(front,'Forsiden · 1–9',F)}
-    ${nineTable(back,'Bagsiden · 10–18',B)}
-    <div class="missnote">ⓘ Stableford er beregnet på dit <b>banehandicap</b> (Skyrup gul: CR 67,4 · slope 123 · par 71 → banehcp = hcp × slope/113 + (CR − par)). Bekræft tallene mod scorekortet/Golfbox — sig til hvis de skal justeres. Farer og linjer er aflæst fra klubbens 18 hulkort.</div>
+    ${nineTable(front,'Forsiden · 1 til 9',F)}
+    ${nineTable(back,'Bagsiden · 10 til 18',B)}
+    <div class="missnote">ⓘ Stableford er beregnet på dit <b>banehandicap</b> (Skyrup gul: CR 67,4 · slope 123 · par 71 → banehcp = hcp × slope/113 + (CR − par)). Bekræft tallene mod scorekortet/Golfbox. Sig til hvis de skal justeres. Farer og linjer er aflæst fra klubbens 18 hulkort.</div>
     <div style="margin-top:12px"><button class="ghost" id="backHome">← Tilbage til ${player.first}</button></div>`;
   document.getElementById('backHome').onclick=()=>{renderHome();show('home');};
   show('summary');
@@ -768,7 +768,7 @@ function pickMood(i,m){
   lastLegend=idx; const L=LEGENDS[idx], last=(i===17);
   const ini=L.n.split(' ').map(w=>w[0]).join('').slice(0,2);
   const slug=LEGPIC[L.n];
-  const back=second?`<div class="ph-back">👋 Godt at se dig igen, ${player.first}. Det her er mit <b>andet og sidste råd</b> i dag — så lyt godt efter. Du spiller med hovedet derude, og det er lige præcis sådan, man vinder en dyst som denne.</div>`:'';
+  const back=second?`<div class="ph-back">👋 Godt at se dig igen, ${player.first}. Det her er mit <b>andet og sidste råd</b> i dag. Så lyt godt efter. Du spiller med hovedet derude, og det er lige præcis sådan, man vinder en dyst som denne.</div>`:'';
   document.getElementById('phInner').innerHTML=`
     <div class="ph-coach ${m}">
       <div class="ph-legend">
@@ -803,15 +803,15 @@ function renderCaptain(){
   loadCap();
   PLAYERS.forEach(p=>{if(capData.eu[p.id]==null){const rp=roundPoints(p);if(rp!=null)capData.eu[p.id]=rp;}});
   const hc=v=>String(v).replace('.',',');
-  const euRows=PLAYERS.map(p=>`<div class="caprow"><div class="ci eu">${p.first[0]}</div><div class="cnm">${p.name}<small>HCP ${hc(p.hcp)}</small></div><input type="number" inputmode="numeric" min="0" data-team="eu" data-id="${p.id}" value="${capData.eu[p.id]??''}" placeholder="–"></div>`).join('');
-  const usRows=USA.map((p,i)=>`<div class="caprow"><div class="ci us">${p.n[0]}</div><div class="cnm">${p.n}<small>HCP ${hc(p.h)}</small></div><input type="number" inputmode="numeric" min="0" data-team="us" data-id="${i}" value="${capData.us[i]??''}" placeholder="–"></div>`).join('');
+  const euRows=PLAYERS.map(p=>`<div class="caprow"><div class="ci eu">${p.first[0]}</div><div class="cnm">${p.name}<small>HCP ${hc(p.hcp)}</small></div><input type="number" inputmode="numeric" min="0" data-team="eu" data-id="${p.id}" value="${capData.eu[p.id]??''}" placeholder=", "></div>`).join('');
+  const usRows=USA.map((p,i)=>`<div class="caprow"><div class="ci us">${p.n[0]}</div><div class="cnm">${p.n}<small>HCP ${hc(p.h)}</small></div><input type="number" inputmode="numeric" min="0" data-team="us" data-id="${i}" value="${capData.us[i]??''}" placeholder=", "></div>`).join('');
   document.getElementById('captain').innerHTML=`
     <div class="rc">Kaptajnens Holdtavle</div>
-    <div class="rc3" style="margin-bottom:2px">Tast hver spillers stableford-point ind — totalen regner sig selv</div>
+    <div class="rc3" style="margin-bottom:2px">Tast hver spillers stableford-point ind. Totalen regner sig selv</div>
     <div class="capboard" id="capboard"></div>
     <div class="capsec">🇪🇺 Team Europa</div>${euRows}
     <div class="capsec">🇺🇸 Team USA</div>${usRows}
-    <div class="capnote">ⓘ Kun på din telefon (kaptajnens regnskab). Dine egne Europa-point fyldes ud automatisk, hvis din runde er gemt — ret frit. Point tælles sammen, højeste total vinder.</div>
+    <div class="capnote">ⓘ Kun på din telefon (kaptajnens regnskab). Dine egne Europa-point fyldes ud automatisk, hvis din runde er gemt. Ret frit. Point tælles sammen, højeste total vinder.</div>
     <div style="margin-top:16px"><button class="ghost" id="capBack">← Tilbage</button></div>`;
   document.querySelectorAll('#captain input').forEach(inp=>{
     inp.oninput=()=>{const t=inp.dataset.team,id=inp.dataset.id,v=inp.value.trim();
