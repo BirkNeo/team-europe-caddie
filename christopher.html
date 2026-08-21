@@ -591,8 +591,8 @@ function renderHome(){
       <h3>Sådan vinder vi Skåne</h3>
       <p>I dag spiller vi ikke otte runder golf. Vi spiller ÉN kamp — som ét hold. Skyrup vinder man ikke med længde. Man vinder den ved at spille <b>banen</b>, ikke sit ego.</p>
       <ul>
-        <li><b>Spil banen.</b> Hvert hul fortæller dig præcis hvad der skal til — tee-kølle, target, og hvor du IKKE må gå. Følg det.</li>
-        <li><b>Spil sammen.</b> Den der lægger op og giver makkeren ro, vinder hullet. Helteslag taber matcher.</li>
+        <li><b>Spil banen.</b> Hvert hul fortæller dig præcis, hvad der skal til — tee-kølle, target, og hvor du IKKE må gå. Følg det.</li>
+        <li><b>Spil sammen.</b> Den, der lægger op og giver makkeren ro, vinder hullet. Helteslag taber matcher.</li>
         <li><b>Kend dine slag.</b> ${KEND[player.tier]}</li>
       </ul>
       <p class="kick">Én plan. Nul helteslag. Kom så. 🇪🇺</p>
@@ -768,7 +768,7 @@ function pickMood(i,m){
   lastLegend=idx; const L=LEGENDS[idx], last=(i===17);
   const ini=L.n.split(' ').map(w=>w[0]).join('').slice(0,2);
   const slug=LEGPIC[L.n];
-  const back=second?`<div class="ph-back">👋 Godt at se dig igen, ${player.first}. Det her er mit <b>andet og sidste råd</b> i dag — så lyt godt efter. Du spiller med hovedet derude, og det er lige præcis sådan man vinder en dyst som denne.</div>`:'';
+  const back=second?`<div class="ph-back">👋 Godt at se dig igen, ${player.first}. Det her er mit <b>andet og sidste råd</b> i dag — så lyt godt efter. Du spiller med hovedet derude, og det er lige præcis sådan, man vinder en dyst som denne.</div>`:'';
   document.getElementById('phInner').innerHTML=`
     <div class="ph-coach ${m}">
       <div class="ph-legend">
