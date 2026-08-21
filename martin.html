@@ -256,9 +256,11 @@
   .ph-by{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:600;font-size:17px;color:var(--ivory);margin-bottom:11px}
   .ph-by b{color:var(--gold)}
   .ph-legend{display:flex;align-items:center;gap:13px;margin-bottom:15px}
-  .ph-crest{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center;
-    font-family:"Oswald";font-weight:700;font-size:20px;color:var(--ink0);
-    background:linear-gradient(150deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px rgba(230,200,116,.18)}
+  .ph-crest{flex:0 0 58px;height:58px;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+    font-family:"Oswald";font-weight:700;font-size:21px;color:var(--ink0);
+    background:linear-gradient(150deg,var(--gold),var(--gold2));box-shadow:0 0 0 3px rgba(230,200,116,.22)}
+  .ph-crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+  .ph-crest .cini{position:relative}
   .ph-lmeta{flex:1;min-width:0}
   .ph-lname{font-family:"Oswald";text-transform:uppercase;letter-spacing:.04em;font-weight:700;font-size:18px;line-height:1.1}
   .ph-lwon{font-size:12px;color:var(--gold);margin-top:3px}
@@ -414,6 +416,7 @@ const WON={
  "Bobby Jones":"Grand Slam 1930 · grundlagde Masters",
  "Ben Hogan":"9 majors · comeback-legende"
 };
+const LEGPIC={"Tiger Woods":"tiger","Rory McIlroy":"rory","Jack Nicklaus":"nicklaus","Seve Ballesteros":"seve","Gary Player":"player","Bobby Jones":"jones","Ben Hogan":"hogan","Arnold Palmer":"palmer","Nick Faldo":"faldo"};
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 /* Skyrup gul tee — RET disse når scorekortets/Golfbox' officielle tal er bekræftet.
    allowance = handicap-tildeling (1.00 = fuldt, 0.95 = 95% individuel stableford). */
@@ -764,11 +767,12 @@ function pickMood(i,m){
   else{do{idx=Math.floor(Math.random()*LEGENDS.length);}while(LEGENDS.length>1&&idx===lastLegend);}
   lastLegend=idx; const L=LEGENDS[idx], last=(i===17);
   const ini=L.n.split(' ').map(w=>w[0]).join('').slice(0,2);
+  const slug=LEGPIC[L.n];
   const back=second?`<div class="ph-back">👋 Godt at se dig igen, ${player.first}. Det her er mit <b>andet og sidste råd</b> i dag — så lyt godt efter. Du spiller med hovedet derude, og det er lige præcis sådan man vinder en dyst som denne.</div>`:'';
   document.getElementById('phInner').innerHTML=`
     <div class="ph-coach ${m}">
       <div class="ph-legend">
-        <div class="ph-crest">${ini}</div>
+        <div class="ph-crest">${slug?`<img src="legends/${slug}.jpg" alt="${L.n}" onerror="this.style.display='none'">`:''}<span class="cini">${ini}</span></div>
         <div class="ph-lmeta"><div class="ph-lname">${L.n}</div><div class="ph-lwon">🏆 ${WON[L.n]||''}</div></div>
         <div class="ph-mtag ${m}">${MLABEL[m]}</div>
       </div>
