@@ -70,6 +70,9 @@
   .rdesc{color:var(--dim);font-size:14.5px;margin:16px 0 6px;max-width:46ch}
   .chcp{margin-top:11px;font-family:"Oswald";text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--gold)}
   .chcp b{font-weight:700}
+  .welcome{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);border-radius:16px;padding:16px 18px;margin:18px 0 4px;box-shadow:var(--shadow)}
+  .welcome .wtag{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--gold);margin-bottom:8px}
+  .welcome p{font-size:14.5px;color:var(--ivory);line-height:1.6;margin:0}
   .manifesto{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);
     border-radius:16px;padding:17px 18px;margin:20px 0 4px;box-shadow:var(--shadow)}
   .manifesto h3{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--gold);margin-bottom:10px}
@@ -348,7 +351,7 @@
 const PLAYERS=[
  {id:"oscar",name:"Oscar Mogensen",first:"Oscar",hcp:4.9,tier:"a"},
  {id:"bo",name:"Bo Sannung",first:"Bo",hcp:9.1,tier:"a"},
- {id:"mathias",name:"Mathias Meinecke Rosenkrans",first:"Mathias",hcp:10.1,tier:"a"},
+ {id:"mathias",name:"Mathias Meineche Rosenkrans",first:"Mathias",hcp:10.1,tier:"a"},
  {id:"lasse",name:"Lasse Rune Birk",first:"Lasse",hcp:16.2,tier:"t"},
  {id:"thomas",name:"Thomas Müllerz",first:"Thomas",hcp:19,tier:"t"},
  {id:"dennis",name:"Dennis Andersen",first:"Dennis",hcp:23.8,tier:"g"},
@@ -367,6 +370,16 @@ const KEND={
  g:"Du får slag på de svære huller. Spil dem sikkert for net par, så scorer du."
 };
 const MLABEL={godt:"🟢 Godt",okay:"🟡 Okay",daarligt:"🔴 Dårligt"};
+const WELCOME={
+ oscar:"Holdets skarpeste kølle. Når det spidser til, er det dig, resten kigger på. Ikke for at bære holdet alene, men fordi din klasse viser vejen. Din opgave i weekenden er ikke at være helt. Det er at spille frit og lade os læne os op ad roen i dit spil. Vi er heldige at have dig i front.",
+ bo:"Single digit og stabil. Du er den slags spiller, der ikke laver larm, men samler point ind, mens andre kæmper. Du kender følelsen af at stå på en fairway og bare vide, hvad der skal ske. Den ro smitter. Banen her er skabt til dit spil.",
+ mathias:"Lige på kanten af single digit, med et spil der kan vende en dyst på få øjeblikke. Tre gode huller i træk, og en match tipper din vej. Hold hovedet koldt, vælg dine øjeblikke, og nyd at være en af holdets skarpe ender.",
+ lasse:"Du er ikke bare med på holdet. Du byggede det. Du gik fra en sommer, hvor golfen kunne vælte dig, til at vende det til vækst: tålmodighed frem for ego, kapacitet frem for karakter. Den rejse er præcis den golfer, holdet skal spejle sig i. Du behøver ikke bevise noget derude. Bare vær kaptajnen, der spiller klogt og lader roen smitte. Vi følger dig.",
+ thomas:"Taktikeren med flest slag i baghånden på de svære huller. Det gør dig farligere, end tallet lyder. Du henter point præcis dér, hvor banen bider hårdest. Spil positionsgolf, tag dine net pars, og lad USA lave fejlene. Du er en hjørnesten på det her hold.",
+ dennis:"Du er ikke bagerst i feltet. Du er artilleriet. Hver gang du tager en rolig bogey, er det net par og point i kassen. Spil trygt, undgå de store tal, og du bliver en af weekendens stille helte.",
+ martin:"Du får hjælp hele vejen rundt. Brug det. Din vej til at vinde er ikke spektakulær golf, men tålmodig golf: undgå katastroferne, tag dine slag, saml point. Holdet har brug for præcis den slags stabile bidrag. Glæd dig. Det her er dit format.",
+ christopher:"To slag på hvert eneste hul. Lad det synke ind: du er ikke outsideren, du er holdets skjulte våben. Hver bogey er en net birdie. Ingen skriver dig af. Vi regner med de point, du kan hente, når du bare spiller roligt og lader systemet arbejde for dig.",
+};
 const LEGENDS=[
  {n:"Tiger Woods",
   godt:"Godt spillet. Men Tiger fejrede aldrig længe. Han tillod sig præcis ét sekund, og så var blikket på næste beslutning. Følelsen af et godt hul kan gøre dig skødesløs; derfor bliver de bedste i deres rutine, uanset hvad tavlen siger. Nyd det, slip det, og gå ind i næste hul lige så fokuseret.",
@@ -585,7 +598,7 @@ function renderHome(){
     <div class="hname">${player.first}</div>
     <span class="role ${r.c}">${r.t} · HCP ${String(player.hcp).replace('.',',')}</span>
     <div class="chcp">Banehcp · Skyrup (gul) · <b>${playHcp(player.hcp)} slag</b></div>
-    <p class="rdesc">${RDESC[player.tier]}</p>
+    <div class="welcome"><div class="wtag">Til dig, ${player.first}</div><p>${WELCOME[player.id]||RDESC[player.tier]}</p></div>
     ${live}
     <div class="manifesto">
       <h3>Sådan vinder vi Skåne</h3>
