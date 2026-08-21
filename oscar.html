@@ -434,7 +434,7 @@ const LEGPIC={"Tiger Woods":"tiger","Rory McIlroy":"rory","Jack Nicklaus":"nickl
 const COURSE={name:"Skyrup Golf & Hotell",par:71,tee:"Gul"};
 /* Skyrup gul tee. RET disse når scorekortets/Golfbox' officielle tal er bekræftet.
    allowance = handicap-tildeling (1.00 = fuldt, 0.95 = 95% individuel stableford). */
-const RATING={cr:67.4, slope:123, allowance:1.00};
+const RATING={cr:71, slope:133, allowance:1.00};
 const USA=[
  {n:"Fredrik Harries",h:11.1},{n:"Michael Kähler",h:5.2},{n:"Erik Andersen",h:29.9},{n:"Jesper Duus",h:18.1},
  {n:"Marc Riesel",h:14.2},{n:"Chris",h:13.8},{n:"Simon Cahill",h:21},{n:"Michael Messing Thorsen",h:22.2}
@@ -749,7 +749,7 @@ function renderSummary(){
     </div>
     ${nineTable(front,'Forsiden · 1 til 9',F)}
     ${nineTable(back,'Bagsiden · 10 til 18',B)}
-    <div class="missnote">ⓘ Stableford er beregnet på dit <b>banehandicap</b> (Skyrup gul: CR 67,4 · slope 123 · par 71 → banehcp = hcp × slope/113 + (CR − par)). Bekræft tallene mod scorekortet/Golfbox. Sig til hvis de skal justeres. Farer og linjer er aflæst fra klubbens 18 hulkort.</div>
+    <div class="missnote">ⓘ Stableford er beregnet på dit <b>banehandicap</b> (Skyrup gul: CR 71 · slope 133 · par 71 → banehcp = hcp × slope/113 + (CR − par)). Bekræft tallene mod scorekortet/Golfbox. Sig til hvis de skal justeres. Farer og linjer er aflæst fra klubbens 18 hulkort.</div>
     <div style="margin-top:12px"><button class="ghost" id="backHome">← Tilbage til ${player.first}</button></div>`;
   document.getElementById('backHome').onclick=()=>{renderHome();show('home');};
   show('summary');
