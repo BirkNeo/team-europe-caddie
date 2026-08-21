@@ -73,6 +73,7 @@
   .welcome{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);border-radius:16px;padding:16px 18px;margin:18px 0 4px;box-shadow:var(--shadow)}
   .welcome .wtag{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--gold);margin-bottom:8px}
   .welcome p{font-size:14.5px;color:var(--ivory);line-height:1.6;margin:0}
+  .welcome .hygge{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--gold);line-height:1.55}
   .manifesto{background:linear-gradient(180deg,var(--surf),var(--surf2));border:1px solid var(--goldline);
     border-radius:16px;padding:17px 18px;margin:20px 0 4px;box-shadow:var(--shadow)}
   .manifesto h3{font-family:"Oswald";text-transform:uppercase;letter-spacing:.14em;font-size:14px;color:var(--gold);margin-bottom:10px}
@@ -598,7 +599,7 @@ function renderHome(){
     <div class="hname">${player.first}</div>
     <span class="role ${r.c}">${r.t} · HCP ${String(player.hcp).replace('.',',')}</span>
     <div class="chcp">Banehcp · Skyrup (gul) · <b>${playHcp(player.hcp)} slag</b></div>
-    <div class="welcome"><div class="wtag">Til dig, ${player.first}</div><p>${WELCOME[player.id]||RDESC[player.tier]}</p></div>
+    <div class="welcome"><div class="wtag">Til dig, ${player.first}</div><p>${WELCOME[player.id]||RDESC[player.tier]}</p><p class="hygge">Men husk hvad weekenden i virkeligheden handler om: afslapning, hygge og sjov. Vi er her for at være sammen, grine og nyde et par gode dage. Alt det med at slå USA er bare krydderiet ovenpå.</p></div>
     ${live}
     <div class="manifesto">
       <h3>Sådan vinder vi Skåne</h3>
